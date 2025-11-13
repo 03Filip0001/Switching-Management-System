@@ -13,7 +13,6 @@ namespace Server
     [ServiceContract]
     public interface IService1
     {
-
         [OperationContract]
         string GetData(int value);
 
@@ -22,7 +21,10 @@ namespace Server
 
         // TODO: Add your service operations here
         [OperationContract]
-        WorkPlanClass.WorkPlanClass GetWorkPlan();
+        WorkPlanClass.WorkPlanCollection GetWorkPlans();
+
+        [OperationContract]
+        bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans);
     }
 
 

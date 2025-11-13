@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Web.Hosting;
+using System.Xml;
+using WorkPlanClass;
 
 namespace Server
 {
@@ -12,6 +18,7 @@ namespace Server
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
+        protected string pathWorkPlansData = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -30,19 +37,57 @@ namespace Server
             return composite;
         }
 
-        public WorkPlanClass.WorkPlanClass GetWorkPlan()
+        public WorkPlanClass.WorkPlanCollection GetWorkPlans()
         {
-            return new WorkPlanClass.WorkPlanClass
-            {
-                ID = 1,
-                WorkPlanName = "Test ime",
-                WorkPlanState = WorkPlanClass.WorkPlansStates.Draft,
-                OperatorName = "Filip",
-                OperatorSurname = "Test",
-                StartDate = "1.1.2025",
-                EndDate = "2.1.2025"
+            WorkPlanClass.WorkPlanCollection workPlanCollection;
+            var serializer = new DataContractSerializer(typeof(WorkPlanClass.WorkPlanCollection));
 
-            };
+            using (var stream = File.OpenRead(pathWorkPlansData))
+            {
+                Debug.WriteLine("before read");
+                workPlanCollection = (WorkPlanCollection)serializer.ReadObject(stream);
+                Debug.WriteLine("after read");
+            }
+
+            return workPlanCollection;
+        }
+
+        public bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlan)
+        {
+            try
+            {
+                WorkPlanClass.WorkPlanCollection workPlanCollection;
+                var serializer = new DataContractSerializer(typeof(WorkPlanClass.WorkPlanCollection));
+                var settings = new XmlWriterSettings { Indent = true };
+
+                Debug.WriteLine("checking if file exists");
+                if (File.Exists(pathWorkPlansData) && new FileInfo(pathWorkPlansData).Length > 0)
+                {
+                    using (var stream = File.OpenRead(pathWorkPlansData))
+                    {
+                        Debug.WriteLine("before read");
+                        workPlanCollection = (WorkPlanCollection)serializer.ReadObject(stream);
+                        Debug.WriteLine("after read");
+                    }
+                }
+                else
+                {
+                    workPlanCollection = new WorkPlanClass.WorkPlanCollection();
+                }
+
+                Debug.WriteLine("adding new work plan");
+                workPlanCollection.WorkPlans.Add(workPlan);
+                using (var writer = XmlWriter.Create(pathWorkPlansData, settings))
+                {
+                    serializer.WriteObject(writer, workPlanCollection);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
