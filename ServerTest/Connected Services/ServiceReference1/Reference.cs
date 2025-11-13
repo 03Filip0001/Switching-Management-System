@@ -90,11 +90,17 @@ namespace ServerTest.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         System.Threading.Tasks.Task<ServerTest.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(ServerTest.ServiceReference1.CompositeType composite);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlan", ReplyAction="http://tempuri.org/IService1/GetWorkPlanResponse")]
-        WorkPlanClass.WorkPlanClass GetWorkPlan();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
+        WorkPlanClass.WorkPlanClass GetWorkPlans();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlan", ReplyAction="http://tempuri.org/IService1/GetWorkPlanResponse")]
-        System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlanAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
+        System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlansAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
+        bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
+        System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlanClass workPlans);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -140,12 +146,20 @@ namespace ServerTest.ServiceReference1 {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public WorkPlanClass.WorkPlanClass GetWorkPlan() {
-            return base.Channel.GetWorkPlan();
+        public WorkPlanClass.WorkPlanClass GetWorkPlans() {
+            return base.Channel.GetWorkPlans();
         }
         
-        public System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlanAsync() {
-            return base.Channel.GetWorkPlanAsync();
+        public System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlansAsync() {
+            return base.Channel.GetWorkPlansAsync();
+        }
+        
+        public bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans) {
+            return base.Channel.SaveWorkPlan(workPlans);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlanClass workPlans) {
+            return base.Channel.SaveWorkPlanAsync(workPlans);
         }
     }
 }

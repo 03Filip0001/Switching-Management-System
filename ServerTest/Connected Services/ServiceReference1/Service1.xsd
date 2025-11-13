@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:54862/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Server" />
-  <xs:import schemaLocation="http://localhost:54862/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WorkPlanClass" />
+  <xs:import schemaLocation="http://localhost:54862/Service1.svc?xsd=xsd3" />
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence>
@@ -30,15 +30,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetWorkPlan">
+  <xs:element name="GetWorkPlans">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetWorkPlanResponse">
+  <xs:element name="GetWorkPlansResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WorkPlanClass" minOccurs="0" name="GetWorkPlanResult" nillable="true" type="q3:WorkPlanClass" />
+        <xs:element minOccurs="0" name="GetWorkPlansResult" nillable="true" type="WorkPlan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveWorkPlan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workPlans" nillable="true" type="WorkPlan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveWorkPlanResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveWorkPlanResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
