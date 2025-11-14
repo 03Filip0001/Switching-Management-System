@@ -10,7 +10,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 {
     internal class AddWorkPlanModel : ViewModelBase
     {
-        public event Action RequestClose;
+        public event Action RequestClose = null!;
         public RelayCommand Button_SaveWorkPlan => new RelayCommand(execute => SaveWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_CancelWorkPlan => new RelayCommand(execute => CancelWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_AddInstruction => new RelayCommand(execute => AddInstruction(), canExecute => { return true; });
@@ -164,9 +164,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddInstruction()
         {
-            string msg = "Add Instruction\n" + OperatorSurname + "\n" + Instructions.Instructions.Count().ToString();
-            MessageBox.Show(msg);
-            Instructions.Instructions.Add(new WorkPlanClass.Instruction());
+            Instructions.Instructions.Add(new WorkPlanClass.Instruction(Instructions.Instructions.Count() + 1));
         }
 
         private void DeleteInstruction()

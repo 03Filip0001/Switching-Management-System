@@ -5,19 +5,26 @@ using System.Text;
 
 namespace WorkPlanClass
 {
-    public class Switches
+    public class Switch
     {
         public int Switch_ID { get; set; }
-        public bool state {get; set; }
-        public Switches() { }
+        public bool State {get; set; }
+        public string StateToString => State ? "Open" : "Closed";
+        public Switch() { }
     }
 
     public class Instruction
     {
         public int Number {get; set; }
-        public ObservableCollection<Switches> Switches {get; set;}
+        public ObservableCollection<Switch> Switches {get; set;}
         public Instruction() {
-            Switches = new ObservableCollection<Switches>();
+            Switches = new ObservableCollection<Switch>();
+            Number = 0;
+        }
+        public Instruction(int number)
+        {
+            Switches = new ObservableCollection<Switch>();
+            Number = number;
         }
     }
     public class InstructionsClass
