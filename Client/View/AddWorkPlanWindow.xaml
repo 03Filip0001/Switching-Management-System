@@ -127,7 +127,7 @@
 
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderBrush="Gray" CornerRadius="5" BorderThickness="1">
+                                            <Border BorderBrush="Gray" CornerRadius="5" BorderThickness="1" Margin="3,0,3,0">
                                                 <TextBlock>
                                                     <Run Text="{Binding Switch_ID, StringFormat=Switch: {0}}"/>
                                                     <LineBreak />

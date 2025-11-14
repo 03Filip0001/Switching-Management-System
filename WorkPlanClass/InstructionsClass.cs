@@ -22,7 +22,7 @@ namespace WorkPlanClass
         private bool _State;
         public bool State { get { return _State; } set { _State = value; OnPropertyChanged(); } }
         public string StateToString => State ? "Open" : "Closed";
-        public Switch() { }
+        public Switch() { Switch_ID = 0; State = false; }
     }
 
     public class Instruction : NotifyPropertyChanged 

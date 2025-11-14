@@ -15,7 +15,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Button_CancelWorkPlan => new RelayCommand(execute => CancelWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_AddInstruction => new RelayCommand(execute => AddInstruction(), canExecute => { return true; });
         public RelayCommand Button_DeleteInstruction => new RelayCommand(execute => DeleteInstruction(), canExecute => { return SelectedInstruction != null; });
-        public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return true; });
+        public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return SelectedInstruction != null; });
         public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => { return true; });
 
         private int _ID;
@@ -189,8 +189,8 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddSwitch()
         {
-            string msg = "Add switch\n" + EndDate.ToString();
-            MessageBox.Show(msg);
+            WorkPlanClass.Switch sw = new WorkPlanClass.Switch();
+            SelectedInstruction.Switches.Add(sw);
         }
 
         private void DeleteSwitch() 
