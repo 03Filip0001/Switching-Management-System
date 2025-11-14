@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mini_Switching_Management_System_Client.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,15 @@ namespace Mini_Switching_Management_System_Client.View
     /// <summary>
     /// Interaction logic for AddWorkPlanWindow.xaml
     /// </summary>
+
     public partial class AddWorkPlanWindow : Window
     {
         public AddWorkPlanWindow()
         {
             InitializeComponent();
+            AddWorkPlanModel addWP = new AddWorkPlanModel();
+            addWP.RequestClose += () => this.Close();
+            DataContext = addWP;
         }
     }
 }

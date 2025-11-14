@@ -21,7 +21,7 @@ namespace WorkPlanClass
     }
     public class InstructionsClass
     {
-        List<Instruction> Instructions;
+        public List<Instruction> Instructions;
         public InstructionsClass() {
             Instructions = new List<Instruction>();
         }
