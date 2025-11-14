@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace WorkPlanClass
 {
     public class Switches
     {
-        public int Switch_ID;
-        public bool state;
+        public int Switch_ID { get; set; }
+        public bool state {get; set; }
         public Switches() { }
     }
 
     public class Instruction
     {
-        public int Number;
-        List<Switches> Switches;
+        public int Number {get; set; }
+        public ObservableCollection<Switches> Switches {get; set;}
         public Instruction() {
-            Switches = new List<Switches>();
+            Switches = new ObservableCollection<Switches>();
         }
     }
     public class InstructionsClass
     {
-        public List<Instruction> Instructions;
+        public ObservableCollection<Instruction> Instructions { get; set; }
         public InstructionsClass() {
-            Instructions = new List<Instruction>();
+            Instructions = new ObservableCollection<Instruction>();
         }
     }
 }
