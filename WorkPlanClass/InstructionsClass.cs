@@ -4,14 +4,14 @@ using System.Text;
 
 namespace WorkPlanClass
 {
-    internal class Switches
+    public class Switches
     {
         public int Switch_ID;
         public bool state;
         public Switches() { }
     }
 
-    internal class Instruction
+    public class Instruction
     {
         public int Number;
         List<Switches> Switches;
@@ -19,7 +19,7 @@ namespace WorkPlanClass
             Switches = new List<Switches>();
         }
     }
-    internal class InstructionsClass
+    public class InstructionsClass
     {
         List<Instruction> Instructions;
         public InstructionsClass() {
