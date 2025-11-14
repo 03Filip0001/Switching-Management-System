@@ -8,13 +8,13 @@ using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class AddWorkPlanModel : ViewModelBase
+    internal class AddWorkPlanModel : NotifyPropertyChanged
     {
         public event Action RequestClose = null!;
         public RelayCommand Button_SaveWorkPlan => new RelayCommand(execute => SaveWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_CancelWorkPlan => new RelayCommand(execute => CancelWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_AddInstruction => new RelayCommand(execute => AddInstruction(), canExecute => { return true; });
-        public RelayCommand Button_DeleteInstruction => new RelayCommand(execute => DeleteInstruction(), canExecute => { return true; });
+        public RelayCommand Button_DeleteInstruction => new RelayCommand(execute => DeleteInstruction(), canExecute => { return SelectedInstruction != null; });
         public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return true; });
         public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => { return true; });
 
@@ -106,6 +106,17 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             }
         }
 
+        private WorkPlanClass.Instruction _selectedInstruction = null!;
+        public WorkPlanClass.Instruction SelectedInstruction
+        {
+            get { return _selectedInstruction; }
+            set
+            {
+                _selectedInstruction = value;
+                OnPropertyChanged();
+            }
+        }
+
         public AddWorkPlanModel()
         {
             Instructions = new WorkPlanClass.InstructionsClass();
@@ -164,13 +175,16 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddInstruction()
         {
-            Instructions.Instructions.Add(new WorkPlanClass.Instruction(Instructions.Instructions.Count() + 1));
+            Instructions.Instructions.Add(new WorkPlanClass.Instruction(Instructions.Instructions.Count + 1));
         }
 
         private void DeleteInstruction()
         {
-            string msg = "Delete instruction\n" + StartDate.ToString();
-            MessageBox.Show(msg);
+            Instructions.Instructions.Remove(SelectedInstruction);
+            for (int i = 0; i < Instructions.Instructions.Count; i++)
+            {
+                Instructions.Instructions[i].Number = i + 1;
+            }
         }
 
         private void AddSwitch()

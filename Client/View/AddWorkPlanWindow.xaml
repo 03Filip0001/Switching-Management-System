@@ -105,7 +105,7 @@
             </Grid>
 
             <ListView Grid.Row="1" ItemsSource="{Binding Instructions.Instructions}" HorizontalContentAlignment="Stretch"
-                      SelectionMode="Single">
+                      SelectionMode="Single" SelectedItem="{Binding SelectedInstruction}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" Margin="3" Padding="3" HorizontalAlignment="Stretch">

@@ -5,18 +5,33 @@ using System.Text;
 
 namespace WorkPlanClass
 {
-    public class Switch
+    public class Switch : NotifyPropertyChanged
     {
-        public int Switch_ID { get; set; }
-        public bool State {get; set; }
+        private int _Switch_ID;
+        public int Switch_ID {
+            get
+            {
+                return _Switch_ID;
+            }
+            set
+            {
+                _Switch_ID = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _State;
+        public bool State { get { return _State; } set { _State = value; OnPropertyChanged(); } }
         public string StateToString => State ? "Open" : "Closed";
         public Switch() { }
     }
 
-    public class Instruction
+    public class Instruction : NotifyPropertyChanged 
     {
-        public int Number {get; set; }
-        public ObservableCollection<Switch> Switches {get; set;}
+        private int _Number;
+        public int Number { get { return _Number; } set { _Number = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<Switch> _Switches;
+        public ObservableCollection<Switch> Switches { get { return _Switches; } set { _Switches = value; OnPropertyChanged(); } }
         public Instruction() {
             Switches = new ObservableCollection<Switch>();
             Number = 0;
@@ -27,9 +42,10 @@ namespace WorkPlanClass
             Number = number;
         }
     }
-    public class InstructionsClass
+    public class InstructionsClass : NotifyPropertyChanged
     {
-        public ObservableCollection<Instruction> Instructions { get; set; }
+        private ObservableCollection<Instruction> _Instructions;
+        public ObservableCollection<Instruction> Instructions { get { return _Instructions; } set { _Instructions = value; OnPropertyChanged(); } }
         public InstructionsClass() {
             Instructions = new ObservableCollection<Instruction>();
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mini_Switching_Management_System_Client.MVVM
 {
-    class ViewModelBase : INotifyPropertyChanged
+    class NotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : NotifyPropertyChanged
     {
         private ObservableCollection<Server.WorkPlan> _WorkPlans;
         public ObservableCollection<Server.WorkPlan> WorkPlans {
