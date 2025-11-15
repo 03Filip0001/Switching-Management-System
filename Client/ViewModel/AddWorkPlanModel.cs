@@ -120,6 +120,9 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         public AddWorkPlanModel()
         {
+            Server.Service1Client client = new Server.Service1Client();
+            ID = client.GetNewWorkPlanUniqueID();
+
             Instructions = new WorkPlanClass.InstructionsClass();
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;

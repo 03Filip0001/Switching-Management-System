@@ -229,6 +229,12 @@ namespace Server
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
         System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(Server.WorkPlan workPlans);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
+        int GetNewWorkPlanUniqueID();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
+        System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
@@ -319,6 +325,16 @@ namespace Server
         public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(Server.WorkPlan workPlans)
         {
             return base.Channel.SaveWorkPlanAsync(workPlans);
+        }
+        
+        public int GetNewWorkPlanUniqueID()
+        {
+            return base.Channel.GetNewWorkPlanUniqueID();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync()
+        {
+            return base.Channel.GetNewWorkPlanUniqueIDAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
