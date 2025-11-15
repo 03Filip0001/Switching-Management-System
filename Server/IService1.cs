@@ -25,6 +25,9 @@ namespace Server
 
         [OperationContract]
         bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans);
+
+        [OperationContract]
+        int GetNewWorkPlanUniqueID();
     }
 
 
