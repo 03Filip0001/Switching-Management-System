@@ -1,0 +1,22 @@
+﻿<Window x:Class="Mini_Switching_Management_System_Client.View.DeleteSwitchDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mini_Switching_Management_System_Client.View"
+        mc:Ignorable="d"
+        Title="DeleteSwitchDialog" Height="150" Width="400">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Height="30">
+            <TextBlock Text="Enter switch ID from selected instruction to delete:" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
+            <TextBox Text="{Binding Delete_Switch_ID_InputBox, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="5,0,0,0" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Content="Delete" Margin="0,0,20,10" FontSize="15" Command="{Binding Button_Delete}"/>
+            <Button Content="Cancel" Margin="20,0,0,10" FontSize="15" Command="{Binding Button_Cancel}"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
 ﻿using Mini_Switching_Management_System_Client.MVVM;
+using Mini_Switching_Management_System_Client.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Button_AddInstruction => new RelayCommand(execute => AddInstruction(), canExecute => { return true; });
         public RelayCommand Button_DeleteInstruction => new RelayCommand(execute => DeleteInstruction(), canExecute => { return SelectedInstruction != null; });
         public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return SelectedInstruction != null; });
-        public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => { return true; });
+        public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => DeleteSwitch_ButtonEnable());
 
         private int _ID;
         public int ID
@@ -195,7 +196,36 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void DeleteSwitch() 
         {
-            MessageBox.Show("Delete switch");
+            var dialog = new DeleteSwitchDialog();
+            var result = dialog.ShowDialog();
+
+
+            var vm = (DeleteSwitchDialogViewModel) dialog.DataContext;
+            bool delete = vm.Delete_Switch;
+            int delete_id = vm.Delete_Switch_ID;
+
+            if (delete)
+            {
+                WorkPlanClass.Switch sw = null;
+                for (int i = 0; i < SelectedInstruction.Switches.Count; i++)
+                {
+                    if (SelectedInstruction.Switches[i].Switch_ID == delete_id)
+                    {
+                        sw = SelectedInstruction.Switches[i];
+                        break;
+                    }
+                }
+
+                if (sw != null) SelectedInstruction.Switches.Remove(sw);
+            }
+        }
+
+        private bool DeleteSwitch_ButtonEnable()
+        {
+            if(SelectedInstruction == null ) return false;
+            if(SelectedInstruction.Switches.Count == 0 ) return false;
+
+            return true;
         }
     }
 }
