@@ -48,7 +48,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding WorkPlanName}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -67,14 +67,14 @@
                 </Style>
             </StackPanel.Style>
 
-            <TextBlock Text="{Binding SelectedWorkPlan.WorkPlanName}" 
+            <TextBlock Text="{Binding SelectedWorkPlan.Name}" 
                         FontSize="15" 
                         HorizontalAlignment="Center"
                         Margin="0,25,0,30"/>
             
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Status:" Margin="5"/>
-                <TextBlock Text="{Binding SelectedWorkPlan.WorkPlanState}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding SelectedWorkPlan.State}" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

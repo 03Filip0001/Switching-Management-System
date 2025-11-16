@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Server
+namespace ServerReference
 {
     using System.Runtime.Serialization;
     
@@ -51,14 +51,14 @@ namespace Server
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansCollection", Namespace="")]
-    public partial class WorkPlansCollection : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansList", Namespace="")]
+    public partial class WorkPlansList : object
     {
         
-        private Server.WorkPlan[] WorkPlansField;
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> WorkPlansField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Server.WorkPlan[] WorkPlans
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> WorkPlans
         {
             get
             {
@@ -81,15 +81,17 @@ namespace Server
         
         private int IDField;
         
+        private ServerReference.InstructionsList InstructionsField;
+        
+        private string NameField;
+        
         private string OperatorNameField;
         
         private string OperatorSurnameField;
         
         private string StartDateField;
         
-        private string WorkPlanNameField;
-        
-        private Server.WorkPlansStates WorkPlanStateField;
+        private ServerReference.WorkPlansStates StateField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string EndDate
@@ -114,6 +116,32 @@ namespace Server
             set
             {
                 this.IDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServerReference.InstructionsList Instructions
+        {
+            get
+            {
+                return this.InstructionsField;
+            }
+            set
+            {
+                this.InstructionsField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
             }
         }
         
@@ -157,34 +185,43 @@ namespace Server
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string WorkPlanName
+        public ServerReference.WorkPlansStates State
         {
             get
             {
-                return this.WorkPlanNameField;
+                return this.StateField;
             }
             set
             {
-                this.WorkPlanNameField = value;
+                this.StateField = value;
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InstructionsList", Namespace="")]
+    public partial class InstructionsList : ServerReference.NotifyPropertyChanged
+    {
+        
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> InstructionsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Server.WorkPlansStates WorkPlanState
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> Instructions
         {
             get
             {
-                return this.WorkPlanStateField;
+                return this.InstructionsField;
             }
             set
             {
-                this.WorkPlanStateField = value;
+                this.InstructionsField = value;
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansStates", Namespace="http://schemas.datacontract.org/2004/07/WorkPlanClass")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansStates", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrarySE")]
     public enum WorkPlansStates : int
     {
         
@@ -201,8 +238,92 @@ namespace Server
         Cancelled = 3,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Server.IService1")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotifyPropertyChanged", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrarySE")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.Instruction))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.Switch))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.InstructionsList))]
+    public partial class NotifyPropertyChanged : object
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Instruction", Namespace="")]
+    public partial class Instruction : ServerReference.NotifyPropertyChanged
+    {
+        
+        private int NumberField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Switch> SwitchesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Number
+        {
+            get
+            {
+                return this.NumberField;
+            }
+            set
+            {
+                this.NumberField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Switch> Switches
+        {
+            get
+            {
+                return this.SwitchesField;
+            }
+            set
+            {
+                this.SwitchesField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Switch", Namespace="")]
+    public partial class Switch : ServerReference.NotifyPropertyChanged
+    {
+        
+        private bool StateField;
+        
+        private int Switch_IDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool State
+        {
+            get
+            {
+                return this.StateField;
+            }
+            set
+            {
+                this.StateField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Switch_ID
+        {
+            get
+            {
+                return this.Switch_IDField;
+            }
+            set
+            {
+                this.Switch_IDField = value;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServerReference.IService1")]
     public interface IService1
     {
         
@@ -213,22 +334,22 @@ namespace Server
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        Server.CompositeType GetDataUsingDataContract(Server.CompositeType composite);
+        ServerReference.CompositeType GetDataUsingDataContract(ServerReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<Server.CompositeType> GetDataUsingDataContractAsync(Server.CompositeType composite);
+        System.Threading.Tasks.Task<ServerReference.CompositeType> GetDataUsingDataContractAsync(ServerReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        Server.WorkPlansCollection GetWorkPlans();
+        ServerReference.WorkPlansList GetWorkPlans();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        System.Threading.Tasks.Task<Server.WorkPlansCollection> GetWorkPlansAsync();
+        System.Threading.Tasks.Task<ServerReference.WorkPlansList> GetWorkPlansAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
-        bool SaveWorkPlan(Server.WorkPlan workPlans);
+        bool SaveWorkPlan(ServerReference.WorkPlan workPlans);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
-        System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(Server.WorkPlan workPlans);
+        System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(ServerReference.WorkPlan workPlans);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
         int GetNewWorkPlanUniqueID();
@@ -238,13 +359,13 @@ namespace Server
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public interface IService1Channel : Server.IService1, System.ServiceModel.IClientChannel
+    public interface IService1Channel : ServerReference.IService1, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<Server.IService1>, Server.IService1
+    public partial class Service1Client : System.ServiceModel.ClientBase<ServerReference.IService1>, ServerReference.IService1
     {
         
         /// <summary>
@@ -297,32 +418,32 @@ namespace Server
             return base.Channel.GetDataAsync(value);
         }
         
-        public Server.CompositeType GetDataUsingDataContract(Server.CompositeType composite)
+        public ServerReference.CompositeType GetDataUsingDataContract(ServerReference.CompositeType composite)
         {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<Server.CompositeType> GetDataUsingDataContractAsync(Server.CompositeType composite)
+        public System.Threading.Tasks.Task<ServerReference.CompositeType> GetDataUsingDataContractAsync(ServerReference.CompositeType composite)
         {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public Server.WorkPlansCollection GetWorkPlans()
+        public ServerReference.WorkPlansList GetWorkPlans()
         {
             return base.Channel.GetWorkPlans();
         }
         
-        public System.Threading.Tasks.Task<Server.WorkPlansCollection> GetWorkPlansAsync()
+        public System.Threading.Tasks.Task<ServerReference.WorkPlansList> GetWorkPlansAsync()
         {
             return base.Channel.GetWorkPlansAsync();
         }
         
-        public bool SaveWorkPlan(Server.WorkPlan workPlans)
+        public bool SaveWorkPlan(ServerReference.WorkPlan workPlans)
         {
             return base.Channel.SaveWorkPlan(workPlans);
         }
         
-        public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(Server.WorkPlan workPlans)
+        public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(ServerReference.WorkPlan workPlans)
         {
             return base.Channel.SaveWorkPlanAsync(workPlans);
         }

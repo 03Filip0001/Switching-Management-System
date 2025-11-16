@@ -91,16 +91,16 @@ namespace ServerTest.ServiceReference1 {
         System.Threading.Tasks.Task<ServerTest.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(ServerTest.ServiceReference1.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        WorkPlanClass.WorkPlanClass GetWorkPlans();
+        WorkPlanClass.WorkPlansList GetWorkPlans();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlansAsync();
+        System.Threading.Tasks.Task<WorkPlanClass.WorkPlansList> GetWorkPlansAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
-        bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans);
+        bool SaveWorkPlan(WorkPlanClass.WorkPlansList workPlans);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
-        System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlanClass workPlans);
+        System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlansList workPlans);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -146,19 +146,19 @@ namespace ServerTest.ServiceReference1 {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public WorkPlanClass.WorkPlanClass GetWorkPlans() {
+        public WorkPlanClass.WorkPlansList GetWorkPlans() {
             return base.Channel.GetWorkPlans();
         }
         
-        public System.Threading.Tasks.Task<WorkPlanClass.WorkPlanClass> GetWorkPlansAsync() {
+        public System.Threading.Tasks.Task<WorkPlanClass.WorkPlansList> GetWorkPlansAsync() {
             return base.Channel.GetWorkPlansAsync();
         }
         
-        public bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans) {
+        public bool SaveWorkPlan(WorkPlanClass.WorkPlansList workPlans) {
             return base.Channel.SaveWorkPlan(workPlans);
         }
         
-        public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlanClass workPlans) {
+        public System.Threading.Tasks.Task<bool> SaveWorkPlanAsync(WorkPlanClass.WorkPlansList workPlans) {
             return base.Channel.SaveWorkPlanAsync(workPlans);
         }
     }

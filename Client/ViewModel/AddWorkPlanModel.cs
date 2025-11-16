@@ -1,15 +1,11 @@
 ﻿using Mini_Switching_Management_System_Client.MVVM;
 using Mini_Switching_Management_System_Client.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class AddWorkPlanModel : NotifyPropertyChanged
+    internal class AddWorkPlanModel : CommonLibrarySE.NotifyPropertyChanged
     {
         public event Action RequestClose = null!;
         public RelayCommand Button_SaveWorkPlan => new RelayCommand(execute => SaveWorkPlan(), canExecute => { return true; });
@@ -41,8 +37,8 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             }
         }
 
-        private Server.WorkPlansStates _WorkPlanState = Server.WorkPlansStates.Draft;
-        public Server.WorkPlansStates WorkPlanState
+        private CommonLibrarySE.WorkPlansStates _WorkPlanState = CommonLibrarySE.WorkPlansStates.Draft;
+        public CommonLibrarySE.WorkPlansStates WorkPlanState
         {
             get { return _WorkPlanState; }
             set
@@ -96,8 +92,8 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             }
         }
 
-        private WorkPlanClass.InstructionsClass _instructions = null!;
-        public WorkPlanClass.InstructionsClass Instructions
+        private CommonLibrarySE.InstructionsList _instructions = null!;
+        public CommonLibrarySE.InstructionsList Instructions
         {
             get { return _instructions; }
             set
@@ -107,8 +103,8 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             }
         }
 
-        private WorkPlanClass.Instruction _selectedInstruction = null!;
-        public WorkPlanClass.Instruction SelectedInstruction
+        private CommonLibrarySE.Instruction _selectedInstruction = null!;
+        public CommonLibrarySE.Instruction SelectedInstruction
         {
             get { return _selectedInstruction; }
             set
@@ -120,10 +116,10 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         public AddWorkPlanModel()
         {
-            Server.Service1Client client = new Server.Service1Client();
+            ServerReference.Service1Client client = new ServerReference.Service1Client();
             ID = client.GetNewWorkPlanUniqueID();
 
-            Instructions = new WorkPlanClass.InstructionsClass();
+            Instructions = new CommonLibrarySE.InstructionsList();
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
             WorkPlanName = string.Empty;
@@ -133,20 +129,21 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void SaveWorkPlan()
         {
-            Server.WorkPlan wp = new Server.WorkPlan()
+            ServerReference.WorkPlan wp = new ServerReference.WorkPlan()
             {
                 ID = this.ID,
-                WorkPlanName = this.WorkPlanName,
-                WorkPlanState = this.WorkPlanState,
+                Name = this.WorkPlanName,
+                State = (ServerReference.WorkPlansStates) this.WorkPlanState,
                 OperatorName = this.OperatorName,
                 OperatorSurname = this.OperatorSurname,
                 StartDate = this.StartDate.ToString("dd/MM/yyyy"),
-                EndDate = this.EndDate.ToString("dd/MM/yyyy")
+                EndDate = this.EndDate.ToString("dd/MM/yyyy"),
+                //Instructions = this.Instructions
             };
 
             try
             {
-                Server.Service1Client client = new Server.Service1Client();
+                ServerReference.Service1Client client = new ServerReference.Service1Client();
                 bool status = client.SaveWorkPlan(wp);
 
                 if (!status) throw new Exception();
@@ -179,7 +176,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddInstruction()
         {
-            Instructions.Instructions.Add(new WorkPlanClass.Instruction(Instructions.Instructions.Count + 1));
+            Instructions.Instructions.Add(new CommonLibrarySE.Instruction { Number = Instructions.Instructions.Count + 1 });
         }
 
         private void DeleteInstruction()
@@ -193,7 +190,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddSwitch()
         {
-            WorkPlanClass.Switch sw = new WorkPlanClass.Switch();
+            CommonLibrarySE.Switch sw = new CommonLibrarySE.Switch();
             SelectedInstruction.Switches.Add(sw);
         }
 
@@ -209,10 +206,10 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
             if (delete)
             {
-                WorkPlanClass.Switch sw = null;
+                CommonLibrarySE.Switch sw = null!;
                 for (int i = 0; i < SelectedInstruction.Switches.Count; i++)
                 {
-                    if (SelectedInstruction.Switches[i].Switch_ID == delete_id)
+                    if (SelectedInstruction.Switches[i].ID == delete_id)
                     {
                         sw = SelectedInstruction.Switches[i];
                         break;

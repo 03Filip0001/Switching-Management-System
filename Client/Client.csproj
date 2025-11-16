@@ -9,11 +9,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WorkPlanClass\WorkPlanClass.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.ServiceModel.Http" Version="8.*" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="8.*" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CommonLibrarySE">
+      <HintPath>..\WorkPlanClass\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

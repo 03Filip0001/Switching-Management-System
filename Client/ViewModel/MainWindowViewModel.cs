@@ -1,17 +1,16 @@
 ﻿using Mini_Switching_Management_System_Client.Model;
 using Mini_Switching_Management_System_Client.MVVM;
 using Mini_Switching_Management_System_Client.View;
-using Server;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class MainWindowViewModel : NotifyPropertyChanged
+    internal class MainWindowViewModel : CommonLibrarySE.NotifyPropertyChanged
     {
-        private ObservableCollection<Server.WorkPlan> _WorkPlans;
-        public ObservableCollection<Server.WorkPlan> WorkPlans {
+        private ObservableCollection<ServerReference.WorkPlan> _WorkPlans;
+        public ObservableCollection<ServerReference.WorkPlan> WorkPlans {
             get { return _WorkPlans; }
             set {
                 _WorkPlans = value;
@@ -21,11 +20,11 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Menu_AddWorkPlan => new RelayCommand(execute => AddWorkPlan(), canExecute => { return true; });
         public RelayCommand Refresh_WorkPlans => new RelayCommand(execute => RefreshWorkPlans());
         public MainWindowViewModel() { 
-            WorkPlans = new ObservableCollection<Server.WorkPlan>();
+            WorkPlans = new ObservableCollection<ServerReference.WorkPlan>();
         }
 
-        private Server.WorkPlan selectedWorkPlan;
-        public  Server.WorkPlan SelectedWorkPlan
+        private ServerReference.WorkPlan selectedWorkPlan;
+        public ServerReference.WorkPlan SelectedWorkPlan
         {
             get { return selectedWorkPlan; }
             set { 
@@ -42,12 +41,13 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void RefreshWorkPlans()
         {
-            Server.Service1Client serverClient = new Server.Service1Client();
-            Server.WorkPlansCollection workPlans = serverClient.GetWorkPlans();
+            ServerReference.Service1Client serverClient = new ServerReference.Service1Client();
+            ServerReference.WorkPlansList workPlans = serverClient.GetWorkPlans();
 
-            WorkPlans = new ObservableCollection<Server.WorkPlan>(workPlans.WorkPlans);
-            Debug.WriteLine(WorkPlans);
-            Debug.WriteLine(WorkPlans.Count);
+            if (workPlans != null)
+            {
+                WorkPlans = new ObservableCollection<ServerReference.WorkPlan>(workPlans.WorkPlans);
+            }
         }
     }
 }

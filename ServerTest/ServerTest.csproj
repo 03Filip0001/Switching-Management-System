@@ -98,9 +98,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WorkPlanClass\WorkPlanClass.csproj">
+    <ProjectReference Include="..\WorkPlanClass\CommonLibrarySE.csproj">
       <Project>{b9313605-1743-40ef-ad45-56432d241558}</Project>
-      <Name>WorkPlanClass</Name>
+      <Name>CommonLibrarySE</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

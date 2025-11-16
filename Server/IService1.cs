@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using WorkPlanClass;
 
 namespace Server
 {
@@ -21,10 +20,10 @@ namespace Server
 
         // TODO: Add your service operations here
         [OperationContract]
-        WorkPlanClass.WorkPlanCollection GetWorkPlans();
+        CommonLibrarySE.WorkPlanList GetWorkPlans();
 
         [OperationContract]
-        bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlans);
+        bool SaveWorkPlan(CommonLibrarySE.WorkPlan workPlans);
 
         [OperationContract]
         int GetNewWorkPlanUniqueID();

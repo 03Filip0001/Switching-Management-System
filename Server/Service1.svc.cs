@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Web.Hosting;
 using System.Xml;
-using WorkPlanClass;
 
 namespace Server
 {
@@ -55,27 +54,28 @@ namespace Server
             return composite;
         }
 
-        public WorkPlanClass.WorkPlanCollection GetWorkPlans()
+        public CommonLibrarySE.WorkPlanList GetWorkPlans()
         {
-            WorkPlanClass.WorkPlanCollection workPlanCollection;
-            var serializer = new DataContractSerializer(typeof(WorkPlanClass.WorkPlanCollection));
+            CommonLibrarySE.WorkPlanList workPlanCollection = null;
+            var serializer = new DataContractSerializer(typeof(CommonLibrarySE.WorkPlanList));
 
-            using (var stream = File.OpenRead(pathWorkPlansData))
+            if (File.Exists(pathWorkPlansData) && new FileInfo(pathWorkPlansData).Length > 0)
             {
-                Debug.WriteLine("before read");
-                workPlanCollection = (WorkPlanCollection)serializer.ReadObject(stream);
-                Debug.WriteLine("after read");
+                using (var stream = File.OpenRead(pathWorkPlansData))
+                {
+                    workPlanCollection = (CommonLibrarySE.WorkPlanList)serializer.ReadObject(stream);
+                }
             }
 
             return workPlanCollection;
         }
 
-        public bool SaveWorkPlan(WorkPlanClass.WorkPlanClass workPlan)
+        public bool SaveWorkPlan(CommonLibrarySE.WorkPlan workPlan)
         {
             try
             {
-                WorkPlanClass.WorkPlanCollection workPlanCollection;
-                var serializer = new DataContractSerializer(typeof(WorkPlanClass.WorkPlanCollection));
+                CommonLibrarySE.WorkPlanList workPlanCollection;
+                var serializer = new DataContractSerializer(typeof(CommonLibrarySE.WorkPlanList));
                 var settings = new XmlWriterSettings { Indent = true };
 
                 Debug.WriteLine("checking if file exists");
@@ -84,13 +84,13 @@ namespace Server
                     using (var stream = File.OpenRead(pathWorkPlansData))
                     {
                         Debug.WriteLine("before read");
-                        workPlanCollection = (WorkPlanCollection)serializer.ReadObject(stream);
+                        workPlanCollection = (CommonLibrarySE.WorkPlanList)serializer.ReadObject(stream);
                         Debug.WriteLine("after read");
                     }
                 }
                 else
                 {
-                    workPlanCollection = new WorkPlanClass.WorkPlanCollection();
+                    workPlanCollection = new CommonLibrarySE.WorkPlanList();
                 }
 
                 Debug.WriteLine("adding new work plan");

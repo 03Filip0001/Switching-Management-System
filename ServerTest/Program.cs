@@ -15,7 +15,7 @@ namespace ServerTest
             ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
             for (int i = 0; i < 3; i++)
             {
-                WorkPlanClass.WorkPlanClass plan = new WorkPlanClass.WorkPlanClass()
+                WorkPlanClass.WorkPlansList plan = new WorkPlanClass.WorkPlansList()
                 {
                     ID = 1,
                     WorkPlanName = "Testing",

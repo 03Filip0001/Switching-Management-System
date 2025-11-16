@@ -129,7 +129,7 @@
                                         <DataTemplate>
                                             <Border BorderBrush="Gray" CornerRadius="5" BorderThickness="1" Margin="3,0,3,0">
                                                 <TextBlock>
-                                                    <Run Text="{Binding Switch_ID, StringFormat=Switch: {0}}"/>
+                                                    <Run Text="{Binding ID, StringFormat=Switch: {0}}"/>
                                                     <LineBreak />
                                                     <Run Text="{Binding StateToString, StringFormat=State: {0}, Mode=OneWay}" />
                                                 </TextBlock>
