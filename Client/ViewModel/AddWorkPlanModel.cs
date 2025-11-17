@@ -1,6 +1,9 @@
-﻿using Mini_Switching_Management_System_Client.MVVM;
+﻿using Mini_Switching_Management_System_Client.Model;
+using Mini_Switching_Management_System_Client.MVVM;
 using Mini_Switching_Management_System_Client.View;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Printing.IndexedProperties;
 using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
@@ -138,7 +141,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
                 OperatorSurname = this.OperatorSurname,
                 StartDate = this.StartDate.ToString("dd/MM/yyyy"),
                 EndDate = this.EndDate.ToString("dd/MM/yyyy"),
-                //Instructions = this.Instructions
+                Instructions = DTOMapper.ToServerInstructionList(Instructions)
             };
 
             try
