@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class AddWorkPlanModel : CommonLibrarySE.NotifyPropertyChanged
+    internal class AddWorkPlanViewModel : CommonLibrarySE.NotifyPropertyChanged
     {
         public event Action RequestClose = null!;
         public RelayCommand Button_SaveWorkPlan => new RelayCommand(execute => SaveWorkPlan(), canExecute => { return true; });
@@ -117,7 +117,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             }
         }
 
-        public AddWorkPlanModel()
+        public AddWorkPlanViewModel()
         {
             ServerReference.Service1Client client = new ServerReference.Service1Client();
             ID = client.GetNewWorkPlanUniqueID();

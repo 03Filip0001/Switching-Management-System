@@ -24,7 +24,7 @@ namespace Mini_Switching_Management_System_Client.View
         public AddWorkPlanWindow()
         {
             InitializeComponent();
-            AddWorkPlanModel addWP = new AddWorkPlanModel();
+            AddWorkPlanViewModel addWP = new AddWorkPlanViewModel();
             DataContext = addWP;
             addWP.RequestClose += () => this.Close();
         }
