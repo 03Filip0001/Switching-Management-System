@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mini_Switching_Management_System_Client"
+        xmlns:resources="clr-namespace:Mini_Switching_Management_System_Client.Model.Resources"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -21,8 +22,8 @@
         </Grid.ColumnDefinitions>
 
         <Menu Grid.ColumnSpan="5">
-            <MenuItem Header="Menu" FontSize="20">
-                <MenuItem Header="Add work plan" Command="{Binding Menu_AddWorkPlan}"/>
+            <MenuItem Header="{x:Static resources:Common_Resources.Label_menu}" FontSize="20">
+                <MenuItem Header="{x:Static resources:MainWindow_Resources.Label_add_work_plan}" Command="{Binding Button_Menu_AddWorkPlan}"/>
             </MenuItem>
         </Menu>
         
@@ -33,12 +34,12 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Content="Refresh" Margin="5,15,5,5" Grid.Row="0" 
-                    Command="{Binding Refresh_WorkPlans}"
+            <Button Content="{x:Static resources:Common_Resources.Label_refresh}" Margin="5,15,5,5" Grid.Row="0" 
+                    Command="{Binding Button_Refresh}"
                     MaxWidth="150"
                     MinWidth="60"
                     HorizontalAlignment="Left"/>
-            <TextBlock Text="Work plans:" Margin="8" Grid.Row="1"/>
+            <TextBlock Text="{x:Static resources:MainWindow_Resources.Label_work_plans}" Margin="8" Grid.Row="1"/>
             <ListView
                 Grid.Row="2"
                 Margin="5"
@@ -73,27 +74,27 @@
                         Margin="0,25,0,30"/>
             
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Status:" Margin="5"/>
+                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_status}" Margin="5"/>
                 <TextBlock Text="{Binding SelectedWorkPlan.State}" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Operator name:" Margin="5"/>
+                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_operator_name}" Margin="5"/>
                 <TextBlock Text="{Binding SelectedWorkPlan.OperatorName}" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Operator surname:" Margin="5"/>
+                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_operator_surname}" Margin="5"/>
                 <TextBlock Text="{Binding SelectedWorkPlan.OperatorSurname}" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Start date:" Margin="5"/>
+                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_start_date}" Margin="5"/>
                 <TextBlock Text="{Binding SelectedWorkPlan.StartDate}" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="End date:" Margin="5"/>
+                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_end_date}" Margin="5"/>
                 <TextBlock Text="{Binding SelectedWorkPlan.EndDate}" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>

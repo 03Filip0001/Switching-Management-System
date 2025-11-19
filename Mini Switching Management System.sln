@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{3F42F5E0-E39E-45C0-8115-3808BC0DE43A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTest", "ServerTest\ServerTest.csproj", "{5F7110E0-C1FA-4733-9729-E0B0ABAB3027}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1F9981BA-D1C8-4EF0-B813-C2035F2C7361} = {1F9981BA-D1C8-4EF0-B813-C2035F2C7361}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{1F9981BA-D1C8-4EF0-B813-C2035F2C7361}"
 EndProject

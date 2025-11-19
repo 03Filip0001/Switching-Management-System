@@ -29,7 +29,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         public bool Delete_Switch = false;
 
-        private string _Delete_Switch_ID_InputBox;
+        private string _Delete_Switch_ID_InputBox = null!;
         public string Delete_Switch_ID_InputBox
         {
             get { return _Delete_Switch_ID_InputBox; }

@@ -51,28 +51,6 @@ namespace ServerReference
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansList", Namespace="")]
-    public partial class WorkPlansList : object
-    {
-        
-        private System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> WorkPlansField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> WorkPlans
-        {
-            get
-            {
-                return this.WorkPlansField;
-            }
-            set
-            {
-                this.WorkPlansField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlan", Namespace="")]
     public partial class WorkPlan : object
     {
@@ -81,7 +59,7 @@ namespace ServerReference
         
         private int IDField;
         
-        private ServerReference.InstructionsList InstructionsField;
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> InstructionsField;
         
         private string NameField;
         
@@ -91,7 +69,7 @@ namespace ServerReference
         
         private string StartDateField;
         
-        private ServerReference.WorkPlansStates StateField;
+        private ServerReference.WorkPlanStates StateField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string EndDate
@@ -120,7 +98,7 @@ namespace ServerReference
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServerReference.InstructionsList Instructions
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> Instructions
         {
             get
             {
@@ -185,7 +163,7 @@ namespace ServerReference
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServerReference.WorkPlansStates State
+        public ServerReference.WorkPlanStates State
         {
             get
             {
@@ -200,58 +178,8 @@ namespace ServerReference
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InstructionsList", Namespace="")]
-    public partial class InstructionsList : ServerReference.NotifyPropertyChanged
-    {
-        
-        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> InstructionsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Instruction> Instructions
-        {
-            get
-            {
-                return this.InstructionsField;
-            }
-            set
-            {
-                this.InstructionsField = value;
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlansStates", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrarySE")]
-    public enum WorkPlansStates : int
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Draft = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Approved = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Executed = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Cancelled = 3,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NotifyPropertyChanged", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrarySE")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.Instruction))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.Switch))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServerReference.InstructionsList))]
-    public partial class NotifyPropertyChanged : object
-    {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Instruction", Namespace="")]
-    public partial class Instruction : ServerReference.NotifyPropertyChanged
+    public partial class Instruction : object
     {
         
         private int NumberField;
@@ -285,10 +213,28 @@ namespace ServerReference
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlanStates", Namespace="")]
+    public enum WorkPlanStates : int
+    {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Draft = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Approved = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Executed = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Cancelled = 3,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Switch", Namespace="")]
-    public partial class Switch : ServerReference.NotifyPropertyChanged
+    public partial class Switch : object
     {
         
         private bool StateField;
@@ -340,10 +286,10 @@ namespace ServerReference
         System.Threading.Tasks.Task<ServerReference.CompositeType> GetDataUsingDataContractAsync(ServerReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        ServerReference.WorkPlansList GetWorkPlans();
+        System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> GetWorkPlans();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetWorkPlans", ReplyAction="http://tempuri.org/IService1/GetWorkPlansResponse")]
-        System.Threading.Tasks.Task<ServerReference.WorkPlansList> GetWorkPlansAsync();
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan>> GetWorkPlansAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveWorkPlan", ReplyAction="http://tempuri.org/IService1/SaveWorkPlanResponse")]
         bool SaveWorkPlan(ServerReference.WorkPlan workPlans);
@@ -428,12 +374,12 @@ namespace ServerReference
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         
-        public ServerReference.WorkPlansList GetWorkPlans()
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan> GetWorkPlans()
         {
             return base.Channel.GetWorkPlans();
         }
         
-        public System.Threading.Tasks.Task<ServerReference.WorkPlansList> GetWorkPlansAsync()
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerReference.WorkPlan>> GetWorkPlansAsync()
         {
             return base.Channel.GetWorkPlansAsync();
         }

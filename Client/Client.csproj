@@ -19,4 +19,44 @@
       <HintPath>..\WorkPlanClass\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Model\Resources\AddWorkPlan_Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddWorkPlan_Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Model\Resources\Common_Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Common_Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Model\Resources\MainWindow_Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainWindow_Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Model\Resources\WorkPlan_Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WorkPlan_Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Model\Resources\AddWorkPlan_Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddWorkPlan_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Resources\Common_Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Resources\MainWindow_Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainWindow_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Resources\WorkPlan_Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkPlan_Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

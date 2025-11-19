@@ -1,14 +1,14 @@
-﻿using Mini_Switching_Management_System_Client.Model;
+﻿using CommonLibrarySE;
+using Mini_Switching_Management_System_Client.Model.Binding;
+using Mini_Switching_Management_System_Client.Model.DTOMappers;
 using Mini_Switching_Management_System_Client.MVVM;
 using Mini_Switching_Management_System_Client.View;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Printing.IndexedProperties;
 using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    internal class AddWorkPlanViewModel : CommonLibrarySE.NotifyPropertyChanged
+    internal class AddWorkPlanViewModel : NotifyPropertyChanged
     {
         public event Action RequestClose = null!;
         public RelayCommand Button_SaveWorkPlan => new RelayCommand(execute => SaveWorkPlan(), canExecute => { return true; });
@@ -18,103 +18,67 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return SelectedInstruction != null; });
         public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => DeleteSwitch_ButtonEnable());
 
-        private int _ID;
+        private int _ID = 0;
         public int ID
         {
             get { return _ID; }
-            set
-            {
-                _ID = value;
-                OnPropertyChanged();
-            }
+            set { _ID = value; }
         }
 
         private string _WorkPlanName = "";
         public string WorkPlanName
         {
             get { return _WorkPlanName; }
-            set
-            {
-                _WorkPlanName = value;
-                OnPropertyChanged();
-            }
+            set { _WorkPlanName = value; }
         }
 
-        private CommonLibrarySE.WorkPlansStates _WorkPlanState = CommonLibrarySE.WorkPlansStates.Draft;
-        public CommonLibrarySE.WorkPlansStates WorkPlanState
+        private CommonLibrarySE.WorkPlanStates _WorkPlanState = CommonLibrarySE.WorkPlanStates.Draft;
+        public CommonLibrarySE.WorkPlanStates WorkPlanState
         {
             get { return _WorkPlanState; }
-            set
-            {
-                _WorkPlanState = value;
-                OnPropertyChanged();
-            }
+            set { _WorkPlanState = value; }
         }
 
         private string _OperatorName = "";
         public string OperatorName
         {
             get { return _OperatorName; }
-            set
-            {
-                _OperatorName = value;
-                OnPropertyChanged();
-            }
+            set { _OperatorName = value; }
         }
 
         private string _OperatorSurname = "";
         public string OperatorSurname
         {
             get { return _OperatorSurname; }
-            set
-            {
-                _OperatorSurname = value;
-                OnPropertyChanged();
-            }
+            set { _OperatorSurname = value; }
         }
 
         private DateTime _StartDate;
         public DateTime StartDate
         {
             get { return _StartDate; }
-            set
-            {
-                _StartDate = value;
-                OnPropertyChanged();
-            }
+            set { _StartDate = value; }
         }
 
         private DateTime _EndDate;
         public DateTime EndDate
         {
             get { return _EndDate; }
-            set
-            {
-                _EndDate = value;
-                OnPropertyChanged();
-            }
+            set { _EndDate = value; }
         }
 
-        private CommonLibrarySE.InstructionsList _instructions = null!;
-        public CommonLibrarySE.InstructionsList Instructions
+        private ObservableCollection<InstructionBinding> _instructions = null!;
+        public ObservableCollection<InstructionBinding> Instructions
         {
             get { return _instructions; }
-            set
-            {
-                _instructions = value;
-                OnPropertyChanged();
-            }
+            set { _instructions = value; OnPropertyChanged(); }
         }
 
-        private CommonLibrarySE.Instruction _selectedInstruction = null!;
-        public CommonLibrarySE.Instruction SelectedInstruction
+        private InstructionBinding _selectedInstruction = null!;
+        public InstructionBinding SelectedInstruction
         {
             get { return _selectedInstruction; }
-            set
-            {
-                _selectedInstruction = value;
-                OnPropertyChanged();
-            }
+            set { _selectedInstruction = value; }
         }
 
         public AddWorkPlanViewModel()
@@ -122,7 +86,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             ServerReference.Service1Client client = new ServerReference.Service1Client();
             ID = client.GetNewWorkPlanUniqueID();
 
-            Instructions = new CommonLibrarySE.InstructionsList();
+            Instructions = new ObservableCollection<InstructionBinding>();
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
             WorkPlanName = string.Empty;
@@ -136,12 +100,12 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             {
                 ID = this.ID,
                 Name = this.WorkPlanName,
-                State = (ServerReference.WorkPlansStates) this.WorkPlanState,
+                State = (ServerReference.WorkPlanStates) this.WorkPlanState,
                 OperatorName = this.OperatorName,
                 OperatorSurname = this.OperatorSurname,
                 StartDate = this.StartDate.ToString("dd/MM/yyyy"),
                 EndDate = this.EndDate.ToString("dd/MM/yyyy"),
-                Instructions = DTOMapper.ToServerInstructionList(Instructions)
+                Instructions = DTOMapper.Instruction.ToServerInstructionCollection(Instructions)
             };
 
             try
@@ -179,22 +143,21 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddInstruction()
         {
-            Instructions.Instructions.Add(new CommonLibrarySE.Instruction { Number = Instructions.Instructions.Count + 1 });
+            Instructions.Add(new InstructionBinding { Number = Instructions.Count + 1});
         }
 
         private void DeleteInstruction()
         {
-            Instructions.Instructions.Remove(SelectedInstruction);
-            for (int i = 0; i < Instructions.Instructions.Count; i++)
+            Instructions.RemoveAt(SelectedInstruction.Number - 1);
+            for (int i = 0; i < Instructions.Count; i++)
             {
-                Instructions.Instructions[i].Number = i + 1;
+                Instructions[i].Number = i + 1;
             }
         }
 
         private void AddSwitch()
         {
-            CommonLibrarySE.Switch sw = new CommonLibrarySE.Switch();
-            SelectedInstruction.Switches.Add(sw);
+            Instructions[SelectedInstruction.Number - 1].Switches.Add(new SwitchBinding());
         }
 
         private void DeleteSwitch() 
@@ -209,7 +172,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
             if (delete)
             {
-                CommonLibrarySE.Switch sw = null!;
+                SwitchBinding sw = null!;
                 for (int i = 0; i < SelectedInstruction.Switches.Count; i++)
                 {
                     if (SelectedInstruction.Switches[i].ID == delete_id)
