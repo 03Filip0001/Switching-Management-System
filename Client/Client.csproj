@@ -16,7 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommonLibrarySE">
-      <HintPath>..\WorkPlanClass\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
+      <HintPath>..\CommonLibrarySE\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
