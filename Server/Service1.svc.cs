@@ -19,11 +19,14 @@ namespace Server
     public class Service1 : IService1
     {
         private static int _lastWorkPlanID;
-        protected string pathWorkPlansData = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
-        protected string pathWorkPlanID = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
+        private static readonly string pathWorkPlansData;// = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
+        private static readonly string pathWorkPlanID;// = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
 
-        Service1()
+        static Service1()
         {
+            pathWorkPlansData = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
+            pathWorkPlanID = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
+            
             if (File.Exists(pathWorkPlanID) && new FileInfo(pathWorkPlanID).Length > 0)
             {
                 string content = File.ReadAllText(pathWorkPlanID);
@@ -35,6 +38,7 @@ namespace Server
                 File.WriteAllText(pathWorkPlanID, _lastWorkPlanID.ToString());
             }
         }
+        public Service1() { }
         
         public string GetData(int value)
         {
@@ -54,17 +58,21 @@ namespace Server
             return composite;
         }
 
-        public CommonLibrarySE.WorkPlanList GetWorkPlans()
+        public ObservableCollection<CommonLibrarySE.WorkPlan> GetWorkPlans()
         {
-            CommonLibrarySE.WorkPlanList workPlanCollection = null;
-            var serializer = new DataContractSerializer(typeof(CommonLibrarySE.WorkPlanList));
+            ObservableCollection<CommonLibrarySE.WorkPlan> workPlanCollection = null;
+            var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.WorkPlan>));
 
             if (File.Exists(pathWorkPlansData) && new FileInfo(pathWorkPlansData).Length > 0)
             {
                 using (var stream = File.OpenRead(pathWorkPlansData))
                 {
-                    workPlanCollection = (CommonLibrarySE.WorkPlanList)serializer.ReadObject(stream);
+                    workPlanCollection = (ObservableCollection<CommonLibrarySE.WorkPlan>)serializer.ReadObject(stream);
                 }
+            }
+            else
+            {
+                workPlanCollection = new ObservableCollection<CommonLibrarySE.WorkPlan>();
             }
 
             return workPlanCollection;
@@ -74,29 +82,30 @@ namespace Server
         {
             try
             {
-                CommonLibrarySE.WorkPlanList workPlanCollection;
-                var serializer = new DataContractSerializer(typeof(CommonLibrarySE.WorkPlanList));
+                ObservableCollection<CommonLibrarySE.WorkPlan> workPlanCollection;
+                var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.WorkPlan>));
                 var settings = new XmlWriterSettings { Indent = true };
 
-                Debug.WriteLine("checking if file exists");
+                Debug.WriteLine("Checking if file exists");
                 if (File.Exists(pathWorkPlansData) && new FileInfo(pathWorkPlansData).Length > 0)
                 {
                     using (var stream = File.OpenRead(pathWorkPlansData))
                     {
-                        Debug.WriteLine("before read");
-                        workPlanCollection = (CommonLibrarySE.WorkPlanList)serializer.ReadObject(stream);
-                        Debug.WriteLine("after read");
+                        Debug.WriteLine("Reading xaml file...");
+                        workPlanCollection = (ObservableCollection<CommonLibrarySE.WorkPlan>)serializer.ReadObject(stream);
                     }
                 }
                 else
                 {
-                    workPlanCollection = new CommonLibrarySE.WorkPlanList();
+                    Debug.WriteLine("Creating new list...");
+                    workPlanCollection = new ObservableCollection<CommonLibrarySE.WorkPlan>();
                 }
 
-                Debug.WriteLine("adding new work plan");
-                workPlanCollection.WorkPlans.Add(workPlan);
+                Debug.WriteLine("Adding new work plan before saving...");
+                workPlanCollection.Add(workPlan);
                 using (var writer = XmlWriter.Create(pathWorkPlansData, settings))
                 {
+                    Debug.WriteLine("Saving new work plans to xaml...");
                     serializer.WriteObject(writer, workPlanCollection);
                 }
 
@@ -104,13 +113,14 @@ namespace Server
             }
             catch
             {
+                Debug.WriteLine("ERROR SAVING NEW WORK PLAN");
                 return false;
             }
         }
 
         public int GetNewWorkPlanUniqueID()
         {
-            Interlocked.Increment(ref _lastWorkPlanID);
+            int newID = Interlocked.Increment(ref _lastWorkPlanID);
             File.WriteAllText(pathWorkPlanID, _lastWorkPlanID.ToString());
             return _lastWorkPlanID;
         }

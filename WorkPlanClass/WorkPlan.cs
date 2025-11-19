@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace CommonLibrarySE
 {
-    public enum WorkPlansStates { Draft, Approved, Executed, Cancelled }
+    [DataContract(Name = "WorkPlanStates", Namespace ="")]
+    public enum WorkPlanStates {
+        [EnumMember]
+        Draft,
+        [EnumMember]
+        Approved, 
+        [EnumMember]
+        Executed, 
+        [EnumMember]
+        Cancelled 
+    }
 
     [DataContract(Name = "WorkPlan", Namespace ="")]
     public class WorkPlan
@@ -16,7 +25,7 @@ namespace CommonLibrarySE
         public string Name { get; set; }
 
         [DataMember(Name = "State")]
-        public WorkPlansStates State { get; set; }
+        public WorkPlanStates State { get; set; }
 
         [DataMember(Name = "OperatorName")]
         public string OperatorName { get; set; }
@@ -31,7 +40,7 @@ namespace CommonLibrarySE
         public string EndDate { get; set; }
 
         [DataMember(Name = "Instructions")]
-        public InstructionsList Instructions { get; set; }
+        public ObservableCollection<Instruction> Instructions { get; set; }
 
         public override string ToString()
         {
@@ -43,18 +52,6 @@ namespace CommonLibrarySE
             ret += "Start date: " + this.StartDate + "\n";
             ret += "End date: " + this.EndDate + "\n";
             return ret;
-        }
-    }
-
-    [DataContract(Name = "WorkPlansList", Namespace = "")]
-    public class WorkPlanList
-    {
-        [DataMember(Name ="WorkPlans")]
-        public List<WorkPlan> WorkPlans { get; set; }
-
-        public WorkPlanList()
-        {
-            WorkPlans = new List<WorkPlan>();
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
-using WorkPlanClass;
 
 namespace ServerTest
 {
@@ -12,32 +9,41 @@ namespace ServerTest
     {
         static void Main(string[] args)
         {
-            ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
-            for (int i = 0; i < 3; i++)
+            Server.Service1Client client = new Server.Service1Client();
+            ObservableCollection<Server.Instruction> instr = new ObservableCollection<Server.Instruction>
             {
-                WorkPlanClass.WorkPlansList plan = new WorkPlanClass.WorkPlansList()
+                new Server.Instruction
                 {
-                    ID = 1,
-                    WorkPlanName = "Testing",
-                    OperatorName = "Filip",
-                    OperatorSurname = "Test",
-                    WorkPlanState = WorkPlansStates.Draft,
-                    StartDate = "test",
-                    EndDate = "test",
-                };
-                Console.WriteLine(plan);
+                    Number = 1,
+                    Switches = new ObservableCollection<Server.Switch>()
+                },
+                new Server.Instruction
+                {
+                    Number = 2,
+                    Switches = new ObservableCollection<Server.Switch>()
+                }
+            };
 
-                bool status = client.SaveWorkPlan(plan);
-                if (status)
-                {
-                    Console.WriteLine("saved");
-                }
-                else
-                {
-                    Console.WriteLine("NOT SAVED");
-                }
+            Server.WorkPlan plan = new Server.WorkPlan
+            {
+                ID = 1,
+                StartDate = "123",
+                EndDate = "321",
+                Name = "se",
+                OperatorName = "filip",
+                OperatorSurname = "gold",
+                Instructions = instr,
+                State = Server.WorkPlanStates.Draft,
+            };
+
+            if (client.SaveWorkPlan(plan))
+            {
+                Console.WriteLine("saved");
             }
-            client.Close();
+            else
+            {
+                Console.WriteLine("NOT SAVED");
+            }
         }
     }
 }

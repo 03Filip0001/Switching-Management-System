@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -20,7 +21,7 @@ namespace Server
 
         // TODO: Add your service operations here
         [OperationContract]
-        CommonLibrarySE.WorkPlanList GetWorkPlans();
+        ObservableCollection<CommonLibrarySE.WorkPlan> GetWorkPlans();
 
         [OperationContract]
         bool SaveWorkPlan(CommonLibrarySE.WorkPlan workPlans);

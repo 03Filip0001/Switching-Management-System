@@ -6,11 +6,11 @@ using System.Text;
 namespace CommonLibrarySE
 {
     [DataContract(Name = "Switch", Namespace = "")]
-    public class Switch : NotifyPropertyChanged
+    public class Switch
     {
         private int _ID;
         [DataMember(Name = "Switch_ID")]
-        public int ID
+        public virtual int ID
         {
             get
             {
@@ -19,13 +19,12 @@ namespace CommonLibrarySE
             set
             {
                 _ID = value;
-                OnPropertyChanged();
             }
         }
         private bool _State;
         [DataMember(Name = "State")]
-        public bool State { get { return _State; } set { _State = value; OnPropertyChanged(); } }
-        public string StateToString => State ? "Open" : "Closed";
+        public virtual bool State { get { return _State; } set { _State = value; } }
+        public virtual string StateToString => State ? "Open" : "Closed";
         public Switch() { ID = 0; State = false; }
     }
 }

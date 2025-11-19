@@ -38,7 +38,7 @@
   <xs:element name="GetWorkPlansResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetWorkPlansResult" nillable="true" type="WorkPlan" />
+        <xs:element minOccurs="0" name="GetWorkPlansResult" nillable="true" type="ArrayOfWorkPlan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,6 +53,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="SaveWorkPlanResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNewWorkPlanUniqueID">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNewWorkPlanUniqueIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetNewWorkPlanUniqueIDResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
