@@ -1,14 +1,10 @@
 ﻿using Mini_Switching_Management_System_Client.Model.DTOMappers;
-using System;
-using System.Collections.Generic;
+using Mini_Switching_Management_System_Client.Common;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mini_Switching_Management_System_Client.Model.Binding
 {
-    public class WorkPlanBinding : CommonLibrarySE.NotifyPropertyChanged
+    public class WorkPlanDTO : NotifyPropertyChanged
     {
         public CommonLibrarySE.WorkPlan Model { get; set; } = new CommonLibrarySE.WorkPlan();
 
@@ -54,19 +50,19 @@ namespace Mini_Switching_Management_System_Client.Model.Binding
             set { Model.EndDate = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<InstructionBinding> Instructions
+        public ObservableCollection<InstructionDTO> Instructions
         {
             get
             {
-                var collection = new ObservableCollection<InstructionBinding>();
+                var collection = new ObservableCollection<InstructionDTO>();
                 foreach (var instr in Model.Instructions)
                 {
-                    var sw_list = new ObservableCollection<SwitchBinding>();
+                    var sw_list = new ObservableCollection<SwitchDTO>();
                     foreach(var sw in instr.Switches)
                     {
                         sw_list.Add(DTOMapper.Switch.ToSwitchBinding(sw));
                     }
-                    collection.Add(new InstructionBinding { Number = instr.Number, Switches = sw_list });
+                    collection.Add(new InstructionDTO { Number = instr.Number, Switches = sw_list });
                 }
                 return collection;
             }

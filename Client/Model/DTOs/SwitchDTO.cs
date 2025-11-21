@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mini_Switching_Management_System_Client.Common;
 
 namespace Mini_Switching_Management_System_Client.Model.Binding
 {
-    public class SwitchBinding : CommonLibrarySE.NotifyPropertyChanged
+    public class SwitchDTO : NotifyPropertyChanged
     {
         public CommonLibrarySE.Switch Model { get; set; } = new CommonLibrarySE.Switch();
 

@@ -1,9 +1,10 @@
 ﻿using Mini_Switching_Management_System_Client.Model.DTOMappers;
+using Mini_Switching_Management_System_Client.Common;
 using System.Collections.ObjectModel;
 
 namespace Mini_Switching_Management_System_Client.Model.Binding
 {
-    public class InstructionBinding : CommonLibrarySE.NotifyPropertyChanged
+    public class InstructionDTO : NotifyPropertyChanged
     {
         public CommonLibrarySE.Instruction Model {  get; set; } = new CommonLibrarySE.Instruction();
 
@@ -13,8 +14,8 @@ namespace Mini_Switching_Management_System_Client.Model.Binding
             set { Model.Number = value; OnPropertyChanged(); }
         }
 
-        private ObservableCollection<SwitchBinding> _Switches;
-        public ObservableCollection<SwitchBinding> Switches
+        private ObservableCollection<SwitchDTO> _Switches;
+        public ObservableCollection<SwitchDTO> Switches
         {
             get => _Switches;
             set
@@ -29,19 +30,19 @@ namespace Mini_Switching_Management_System_Client.Model.Binding
             }
         }
 
-        private void Switches_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Switches_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
-                foreach (SwitchBinding b in e.NewItems)
+                foreach (SwitchDTO b in e.NewItems)
                     Model.Switches.Add(b.Model);
             if (e.OldItems != null)
-                foreach (SwitchBinding b in e.OldItems)
+                foreach (SwitchDTO b in e.OldItems)
                     Model.Switches.Remove(b.Model);
         }
 
-        public InstructionBinding(CommonLibrarySE.Instruction model = null) {
+        public InstructionDTO(CommonLibrarySE.Instruction model = null!) {
             Model = model ?? new CommonLibrarySE.Instruction();
-            _Switches = new ObservableCollection<SwitchBinding>(Model.Switches.Select(DTOMapper.Switch.ToSwitchBinding));
+            _Switches = new ObservableCollection<SwitchDTO>(Model.Switches.Select(DTOMapper.Switch.ToSwitchBinding));
             _Switches.CollectionChanged += Switches_CollectionChanged;
         }
     }
