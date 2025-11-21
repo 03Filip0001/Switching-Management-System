@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Mini_Switching_Management_System_Client.MVVM
+namespace Mini_Switching_Management_System_Client.Common
 {
     class RelayCommand : ICommand
     {
