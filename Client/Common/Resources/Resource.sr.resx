@@ -118,9 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label_add_work_plan" xml:space="preserve">
-    <value>Add work plan</value>
+    <value>Napravi novi zahtev</value>
+  </data>
+  <data name="Label_cancel" xml:space="preserve">
+    <value>Prekini</value>
+  </data>
+  <data name="Label_end_date" xml:space="preserve">
+    <value>Datum završetka: </value>
+  </data>
+  <data name="Label_id" xml:space="preserve">
+    <value>Zahtev ID: </value>
+  </data>
+  <data name="Label_instruction" xml:space="preserve">
+    <value>Instrukcija</value>
+  </data>
+  <data name="Label_instruction_add" xml:space="preserve">
+    <value>Dodaj instrukciju</value>
+  </data>
+  <data name="Label_instruction_delete" xml:space="preserve">
+    <value>Obriši instrukciju</value>
+  </data>
+  <data name="Label_menu" xml:space="preserve">
+    <value>Meni</value>
+  </data>
+  <data name="Label_name" xml:space="preserve">
+    <value>Ime zahteva: </value>
+  </data>
+  <data name="Label_operator_name" xml:space="preserve">
+    <value>Ime operatera: </value>
+  </data>
+  <data name="Label_operator_surname" xml:space="preserve">
+    <value>Prezime operatera: </value>
+  </data>
+  <data name="Label_refresh" xml:space="preserve">
+    <value>Osveži</value>
+  </data>
+  <data name="Label_request_information" xml:space="preserve">
+    <value>Informacije o zahtevu</value>
+  </data>
+  <data name="Label_save" xml:space="preserve">
+    <value>Sačuvaj</value>
+  </data>
+  <data name="Label_start_date" xml:space="preserve">
+    <value>Datum početka: </value>
+  </data>
+  <data name="Label_state" xml:space="preserve">
+    <value>Stanje</value>
+  </data>
+  <data name="Label_status" xml:space="preserve">
+    <value>Stanje zahteva: </value>
+  </data>
+  <data name="Label_switch" xml:space="preserve">
+    <value>Prekidač</value>
+  </data>
+  <data name="Label_switch_add" xml:space="preserve">
+    <value>Dodaj prekidač</value>
+  </data>
+  <data name="Label_switch_delete" xml:space="preserve">
+    <value>Obriši prekidač</value>
   </data>
   <data name="Label_work_plans" xml:space="preserve">
-    <value>Work plans</value>
+    <value>Zahtevi</value>
   </data>
 </root>

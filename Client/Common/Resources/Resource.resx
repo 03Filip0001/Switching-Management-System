@@ -118,9 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label_add_work_plan" xml:space="preserve">
-    <value>Napravi novi zahtev</value>
+    <value>Add work plan</value>
+  </data>
+  <data name="Label_cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Label_end_date" xml:space="preserve">
+    <value>End date: </value>
+  </data>
+  <data name="Label_id" xml:space="preserve">
+    <value>Work plan ID: </value>
+  </data>
+  <data name="Label_instruction" xml:space="preserve">
+    <value>Instruction</value>
+  </data>
+  <data name="Label_instruction_add" xml:space="preserve">
+    <value>Add instruction</value>
+  </data>
+  <data name="Label_instruction_delete" xml:space="preserve">
+    <value>Delete instruction</value>
+  </data>
+  <data name="Label_menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Label_name" xml:space="preserve">
+    <value>Work plan name: </value>
+  </data>
+  <data name="Label_operator_name" xml:space="preserve">
+    <value>Operator name: </value>
+  </data>
+  <data name="Label_operator_surname" xml:space="preserve">
+    <value>Operator surname: </value>
+  </data>
+  <data name="Label_refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Label_request_information" xml:space="preserve">
+    <value>Request information</value>
+  </data>
+  <data name="Label_save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Label_start_date" xml:space="preserve">
+    <value>Start date: </value>
+  </data>
+  <data name="Label_state" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Label_status" xml:space="preserve">
+    <value>Work plan status: </value>
+  </data>
+  <data name="Label_switch" xml:space="preserve">
+    <value>Switch</value>
+  </data>
+  <data name="Label_switch_add" xml:space="preserve">
+    <value>Add switch</value>
+  </data>
+  <data name="Label_switch_delete" xml:space="preserve">
+    <value>Delete switch</value>
   </data>
   <data name="Label_work_plans" xml:space="preserve">
-    <value>Zahtevi</value>
+    <value>Work plans</value>
   </data>
 </root>

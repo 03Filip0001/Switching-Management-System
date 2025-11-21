@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mini_Switching_Management_System_Client.Model.Resources {
+namespace Mini_Switching_Management_System_Client.Common.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AddWorkPlan_Resources {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddWorkPlan_Resources() {
+        internal Resource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mini_Switching_Management_System_Client.Model.Resources.AddWorkPlan_Resources", typeof(AddWorkPlan_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mini_Switching_Management_System_Client.Common.Resources.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,42 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add work plan.
+        /// </summary>
+        public static string Label_add_work_plan {
+            get {
+                return ResourceManager.GetString("Label_add_work_plan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Label_cancel {
+            get {
+                return ResourceManager.GetString("Label_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date: .
+        /// </summary>
+        public static string Label_end_date {
+            get {
+                return ResourceManager.GetString("Label_end_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work plan ID: .
+        /// </summary>
+        public static string Label_id {
+            get {
+                return ResourceManager.GetString("Label_id", resourceCulture);
             }
         }
         
@@ -88,6 +124,51 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string Label_menu {
+            get {
+                return ResourceManager.GetString("Label_menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work plan name: .
+        /// </summary>
+        public static string Label_name {
+            get {
+                return ResourceManager.GetString("Label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operator name: .
+        /// </summary>
+        public static string Label_operator_name {
+            get {
+                return ResourceManager.GetString("Label_operator_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operator surname: .
+        /// </summary>
+        public static string Label_operator_surname {
+            get {
+                return ResourceManager.GetString("Label_operator_surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Label_refresh {
+            get {
+                return ResourceManager.GetString("Label_refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request information.
         /// </summary>
         public static string Label_request_information {
@@ -97,11 +178,38 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Label_save {
+            get {
+                return ResourceManager.GetString("Label_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date: .
+        /// </summary>
+        public static string Label_start_date {
+            get {
+                return ResourceManager.GetString("Label_start_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State.
         /// </summary>
         public static string Label_state {
             get {
                 return ResourceManager.GetString("Label_state", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work plan status: .
+        /// </summary>
+        public static string Label_status {
+            get {
+                return ResourceManager.GetString("Label_status", resourceCulture);
             }
         }
         
@@ -129,6 +237,15 @@ namespace Mini_Switching_Management_System_Client.Model.Resources {
         public static string Label_switch_delete {
             get {
                 return ResourceManager.GetString("Label_switch_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work plans.
+        /// </summary>
+        public static string Label_work_plans {
+            get {
+                return ResourceManager.GetString("Label_work_plans", resourceCulture);
             }
         }
     }
