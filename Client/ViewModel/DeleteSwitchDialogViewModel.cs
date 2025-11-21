@@ -1,4 +1,4 @@
-﻿using Mini_Switching_Management_System_Client.MVVM;
+﻿using Mini_Switching_Management_System_Client.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
-    class DeleteSwitchDialogViewModel : CommonLibrarySE.NotifyPropertyChanged
+    class DeleteSwitchDialogViewModel : NotifyPropertyChanged
     {
         public event Action RequestClose = null!;
 

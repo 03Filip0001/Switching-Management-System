@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mini_Switching_Management_System_Client.View"
-        xmlns:resources="clr-namespace:Mini_Switching_Management_System_Client.Model.Resources"
+        xmlns:res="clr-namespace:Mini_Switching_Management_System_Client.Common.Resources"
         mc:Ignorable="d"
         Title="AddWorkPlanWindow" Height="450" Width="800">
     <Grid>
@@ -19,37 +19,37 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Grid.Row="0">
-            <TextBlock Text="{x:Static resources:AddWorkPlan_Resources.Label_request_information}" HorizontalAlignment="Center"
+            <TextBlock Text="{x:Static res:Resource.Label_request_information}" HorizontalAlignment="Center"
                         FontWeight="Bold" FontSize="18"
                         Margin="15"/>
 
             <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_id}" Margin="0,0,5,0"/>
+                <TextBlock Text="{x:Static res:Resource.Label_id}" Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding ID}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_status}" Margin="0,0,5,0"/>
+                <TextBlock Text="{x:Static res:Resource.Label_status}" Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding WorkPlanState}"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_name}"/>
+                <TextBlock Text="{x:Static res:Resource.Label_name}"/>
                 <TextBox Text="{Binding WorkPlanName}"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_operator_name}"/>
+                <TextBlock Text="{x:Static res:Resource.Label_operator_name}"/>
                 <TextBox Text="{Binding OperatorName}"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_operator_surname}"/>
+                <TextBlock Text="{x:Static res:Resource.Label_operator_surname}"/>
                 <TextBox Text="{Binding OperatorSurname}" />
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_start_date}"/>
+                <TextBlock Text="{x:Static res:Resource.Label_start_date}"/>
                 <DatePicker SelectedDate="{Binding StartDate}">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
@@ -60,7 +60,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="{x:Static resources:WorkPlan_Resources.Label_end_date}"/>
+                <TextBlock Text="{x:Static res:Resource.Label_end_date}"/>
                 <DatePicker SelectedDate="{Binding EndDate}">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
@@ -77,11 +77,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="{x:Static resources:Common_Resources.Label_save}" HorizontalAlignment="Left" Grid.Column="0" Margin="15"
+            <Button Content="{x:Static res:Resource.Label_save}" HorizontalAlignment="Left" Grid.Column="0" Margin="15"
                     FontSize="15" Width="75" Height="35"
                     Command="{Binding Button_SaveWorkPlan}"/>
 
-            <Button Content="{x:Static resources:Common_Resources.Label_cancel}" HorizontalAlignment="Right" Grid.Column="1" Margin="15"
+            <Button Content="{x:Static res:Resource.Label_cancel}" HorizontalAlignment="Right" Grid.Column="1" Margin="15"
                     FontSize="15" Width="75" Height="35"
                     Command="{Binding Button_CancelWorkPlan}"/>
         </Grid>
@@ -99,10 +99,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="{x:Static resources:AddWorkPlan_Resources.Label_instruction_add}" Grid.Column="0" Margin="10" Command="{Binding Button_AddInstruction}"/>
-                <Button Content="{x:Static resources:AddWorkPlan_Resources.Label_instruction_delete}" Grid.Column="1" Margin="10" Command="{Binding Button_DeleteInstruction}"/>
-                <Button Content="{x:Static resources:AddWorkPlan_Resources.Label_switch_add}" Grid.Column="2" Margin="10" Command="{Binding Button_AddSwitch}"/>
-                <Button Content="{x:Static resources:AddWorkPlan_Resources.Label_switch_delete}" Grid.Column="3" Margin="10" Command="{Binding Button_DeleteSwitch}"/>
+                <Button Content="{x:Static res:Resource.Label_instruction_add}" Grid.Column="0" Margin="10" Command="{Binding Button_AddInstruction}"/>
+                <Button Content="{x:Static res:Resource.Label_instruction_delete}" Grid.Column="1" Margin="10" Command="{Binding Button_DeleteInstruction}"/>
+                <Button Content="{x:Static res:Resource.Label_switch_add}" Grid.Column="2" Margin="10" Command="{Binding Button_AddSwitch}"/>
+                <Button Content="{x:Static res:Resource.Label_switch_delete}" Grid.Column="3" Margin="10" Command="{Binding Button_DeleteSwitch}"/>
             </Grid>
 
             <ListView Grid.Row="1" ItemsSource="{Binding Instructions}" HorizontalContentAlignment="Stretch"
@@ -119,7 +119,7 @@
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
-                                            <Binding Source="{x:Static resources:AddWorkPlan_Resources.Label_instruction}" />
+                                            <Binding Source="{x:Static res:Resource.Label_instruction}" />
                                             <Binding Path="Number" />
                                         </MultiBinding>
                                     </TextBlock.Text>
@@ -139,7 +139,7 @@
                                                     <Run>
                                                         <Run.Text>
                                                             <MultiBinding StringFormat="{}{0} {1}" Mode="OneWay">
-                                                                <Binding Source="{x:Static resources:AddWorkPlan_Resources.Label_switch}" />
+                                                                <Binding Source="{x:Static res:Resource.Label_switch}" />
                                                                 <Binding Path="ID" />
                                                             </MultiBinding>
                                                         </Run.Text>
@@ -148,7 +148,7 @@
                                                     <Run>
                                                         <Run.Text>
                                                             <MultiBinding StringFormat="{}{0} {1}" Mode="OneWay">
-                                                                <Binding Source="{x:Static resources:AddWorkPlan_Resources.Label_state}" />
+                                                                <Binding Source="{x:Static res:Resource.Label_state}" />
                                                                 <Binding Path="StateToString" />
                                                             </MultiBinding>
                                                         </Run.Text>

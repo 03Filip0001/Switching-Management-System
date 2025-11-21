@@ -1,7 +1,7 @@
 ﻿using CommonLibrarySE;
 using Mini_Switching_Management_System_Client.Model.Binding;
 using Mini_Switching_Management_System_Client.Model.DTOMappers;
-using Mini_Switching_Management_System_Client.MVVM;
+using Mini_Switching_Management_System_Client.Common;
 using Mini_Switching_Management_System_Client.View;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -67,15 +67,15 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             set { _EndDate = value; }
         }
 
-        private ObservableCollection<InstructionBinding> _instructions = null!;
-        public ObservableCollection<InstructionBinding> Instructions
+        private ObservableCollection<InstructionDTO> _instructions = null!;
+        public ObservableCollection<InstructionDTO> Instructions
         {
             get { return _instructions; }
             set { _instructions = value; OnPropertyChanged(); }
         }
 
-        private InstructionBinding _selectedInstruction = null!;
-        public InstructionBinding SelectedInstruction
+        private InstructionDTO _selectedInstruction = null!;
+        public InstructionDTO SelectedInstruction
         {
             get { return _selectedInstruction; }
             set { _selectedInstruction = value; }
@@ -86,7 +86,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             ServerReference.Service1Client client = new ServerReference.Service1Client();
             ID = client.GetNewWorkPlanUniqueID();
 
-            Instructions = new ObservableCollection<InstructionBinding>();
+            Instructions = new ObservableCollection<InstructionDTO>();
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
             WorkPlanName = string.Empty;
@@ -143,7 +143,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddInstruction()
         {
-            Instructions.Add(new InstructionBinding { Number = Instructions.Count + 1});
+            Instructions.Add(new InstructionDTO { Number = Instructions.Count + 1});
         }
 
         private void DeleteInstruction()
@@ -157,7 +157,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void AddSwitch()
         {
-            Instructions[SelectedInstruction.Number - 1].Switches.Add(new SwitchBinding());
+            Instructions[SelectedInstruction.Number - 1].Switches.Add(new SwitchDTO());
         }
 
         private void DeleteSwitch() 
@@ -172,7 +172,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
             if (delete)
             {
-                SwitchBinding sw = null!;
+                SwitchDTO sw = null!;
                 for (int i = 0; i < SelectedInstruction.Switches.Count; i++)
                 {
                     if (SelectedInstruction.Switches[i].ID == delete_id)

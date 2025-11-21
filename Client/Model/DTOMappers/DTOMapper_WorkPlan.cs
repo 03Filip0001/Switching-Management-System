@@ -7,13 +7,13 @@ namespace Mini_Switching_Management_System_Client.Model.DTOMappers
     {
         public static class WorkPlan
         {
-            public static ObservableCollection<WorkPlanBinding> ToClientWorkPlanCollection(ObservableCollection<ServerReference.WorkPlan> wp)
+            public static ObservableCollection<WorkPlanDTO> ToClientWorkPlanCollection(ObservableCollection<ServerReference.WorkPlan> wp)
             {
-                ObservableCollection<WorkPlanBinding> wp_client = new ObservableCollection<WorkPlanBinding>();
+                ObservableCollection<WorkPlanDTO> wpClient = new ObservableCollection<WorkPlanDTO>();
 
                 foreach (var workPlan in wp)
                 {
-                    wp_client.Add(new WorkPlanBinding
+                    wpClient.Add(new WorkPlanDTO
                     {
                         ID = workPlan.ID,
                         Name = workPlan.Name,
@@ -22,14 +22,14 @@ namespace Mini_Switching_Management_System_Client.Model.DTOMappers
                         OperatorSurname = workPlan.OperatorSurname,
                         StartDate = workPlan.StartDate,
                         EndDate = workPlan.EndDate,
-                        Instructions = new ObservableCollection<InstructionBinding>
+                        Instructions = new ObservableCollection<InstructionDTO>
                         {
 
                         }
                     });
                 }
 
-                return wp_client;
+                return wpClient;
             }
         }
     }

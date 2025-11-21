@@ -6,12 +6,12 @@ namespace Mini_Switching_Management_System_Client.Model.DTOMappers
     {
         public static class Switch
         {
-            public static SwitchBinding ToSwitchBinding(CommonLibrarySE.Switch sw)
+            public static SwitchDTO ToSwitchBinding(CommonLibrarySE.Switch sw)
             {
-                return new SwitchBinding { ID = sw.ID, State = sw.State };
+                return new SwitchDTO { ID = sw.ID, State = sw.State };
             }
 
-            public static CommonLibrarySE.Switch ToSwitch(SwitchBinding sw)
+            public static CommonLibrarySE.Switch ToSwitch(SwitchDTO sw)
             {
                 return new CommonLibrarySE.Switch { ID = sw.ID, State = sw.State };
             }

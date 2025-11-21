@@ -8,7 +8,7 @@ namespace Mini_Switching_Management_System_Client
     {
         public MainWindow()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
             InitializeComponent();
             MainWindowViewModel vm = new MainWindowViewModel();
             DataContext = vm;

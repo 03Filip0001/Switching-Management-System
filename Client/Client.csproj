@@ -20,10 +20,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Model\Resources\AddWorkPlan_Resources.Designer.cs">
+    <Compile Update="Common\Resources\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AddWorkPlan_Resources.resx</DependentUpon>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Model\Resources\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Model\Resources\tempResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>tempResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Model\Resources\Common_Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -42,9 +52,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Model\Resources\AddWorkPlan_Resources.resx">
+    <EmbeddedResource Update="Common\Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AddWorkPlan_Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Resources\tempResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>tempResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Model\Resources\Common_Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
