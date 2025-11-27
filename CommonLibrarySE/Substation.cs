@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CommonLibrarySE
 {
-    class Substation
+    public class Substation
     {
         private int _ID;
         public int ID

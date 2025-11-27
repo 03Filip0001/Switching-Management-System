@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CommonLibrarySE
 {
-    class Feeder
+    public class Feeder
     {
         private int _ID;
         public int ID
