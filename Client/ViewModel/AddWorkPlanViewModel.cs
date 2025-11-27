@@ -5,6 +5,7 @@ using Mini_Switching_Management_System_Client.Common;
 using Mini_Switching_Management_System_Client.View;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Mini_Switching_Management_System_Client.ViewModel
 {
@@ -18,6 +19,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Button_AddSwitch => new RelayCommand(execute => AddSwitch(), canExecute => { return SelectedInstruction != null; });
         public RelayCommand Button_DeleteSwitch => new RelayCommand(execute => DeleteSwitch(), canExecute => DeleteSwitch_ButtonEnable());
 
+        public RelayCommand Button_SwitchEdit => new RelayCommand(execute: switchItem => EditSwitch(switchItem), canExecute: switchItem => switchItem != null);
         private int _ID = 0;
         public int ID
         {
@@ -192,6 +194,34 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             if(SelectedInstruction.Switches.Count == 0 ) return false;
 
             return true;
+        }
+
+        private void EditSwitch(object switchItemObject)
+        {
+            if(switchItemObject == null) return;
+
+            SwitchDTO? switchDTO = switchItemObject as SwitchDTO;
+
+            EditSwitchDialogViewModel editSwitchVM = new EditSwitchDialogViewModel();
+            EditSwitchWindowView editSwitchView = new EditSwitchWindowView();
+
+            editSwitchVM.SwitchIsOpen = switchDTO.State;
+            editSwitchVM.PreviousID = switchDTO.ID;
+            editSwitchVM.PreviousState = switchDTO.State;
+
+            editSwitchView.DataContext = editSwitchVM;
+            editSwitchVM.RequestClose += (dialogResult) =>
+            {
+                editSwitchView.DialogResult = dialogResult;
+                //editSwitchView.Close();
+            };
+            bool? result = editSwitchView.ShowDialog();
+
+            if (result == true)
+            {
+                switchDTO.ID = editSwitchVM.NewID;
+                switchDTO.State = editSwitchVM.SwitchIsOpen;
+            }
         }
     }
 }

@@ -105,7 +105,8 @@
                 <Button Content="{x:Static res:Resource.Label_switch_delete}" Grid.Column="3" Margin="10" Command="{Binding Button_DeleteSwitch}"/>
             </Grid>
 
-            <ListView Grid.Row="1" ItemsSource="{Binding Instructions}" HorizontalContentAlignment="Stretch"
+            <ListView x:Name="InstructionsListView"
+                      Grid.Row="1" ItemsSource="{Binding Instructions}" HorizontalContentAlignment="Stretch"
                       SelectionMode="Single" SelectedItem="{Binding SelectedInstruction}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -135,6 +136,14 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Border BorderBrush="Gray" CornerRadius="5" BorderThickness="1" Margin="3,0,3,0">
+                                                <Border.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="{x:Static res:Resource.Label_switch_edit}"
+                                                                  Command="{Binding DataContext.Button_SwitchEdit,
+                                                                                    Source={x:Reference InstructionsListView}}"
+                                                                  CommandParameter="{Binding}" />
+                                                    </ContextMenu>
+                                                </Border.ContextMenu>
                                                 <TextBlock>
                                                     <Run>
                                                         <Run.Text>

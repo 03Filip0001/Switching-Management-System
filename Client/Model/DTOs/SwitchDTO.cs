@@ -15,7 +15,7 @@ namespace Mini_Switching_Management_System_Client.Model.Binding
         public bool State
         {
             get { return Model.State; }
-            set { Model.State = value; OnPropertyChanged(); }
+            set { Model.State = value; OnPropertyChanged(); OnPropertyChanged(nameof(StateToString)); }
         }
 
         public string StateToString { get { return Model.StateToString; } }

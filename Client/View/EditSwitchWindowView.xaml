@@ -1,0 +1,48 @@
+﻿<Window x:Class="Mini_Switching_Management_System_Client.View.EditSwitchWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mini_Switching_Management_System_Client.View"
+        xmlns:res="clr-namespace:Mini_Switching_Management_System_Client.Common.Resources"
+        mc:Ignorable="d"
+        Title="EditSwitchWindowView" Height="200" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:Resource.Label_switch_current_id}"/>
+                <TextBlock Text="{Binding PreviousID}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:Resource.Label_switch_current_state}"/>
+                <TextBlock Text="{Binding PreviousState}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:Resource.Label_switch_new_id}"/>
+                <TextBox Width="30" Text="{Binding NewID, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:Resource.Label_switch_new_state}"/>
+                <RadioButton Content="{x:Static res:Resource.Label_open}"
+                             IsChecked="{Binding SwitchIsOpen}"/>
+                <RadioButton Content="{x:Static res:Resource.Label_closed}"
+                             IsChecked="{Binding SwitchIsClosed}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Content="{x:Static res:Resource.Label_save}"
+                        Command="{Binding Button_Save}"/>
+                <Button Content="{x:Static res:Resource.Label_cancel}"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

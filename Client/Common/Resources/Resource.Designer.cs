@@ -79,6 +79,15 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string Label_closed {
+            get {
+                return ResourceManager.GetString("Label_closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date: .
         /// </summary>
         public static string Label_end_date {
@@ -138,6 +147,15 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         public static string Label_name {
             get {
                 return ResourceManager.GetString("Label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Label_open {
+            get {
+                return ResourceManager.GetString("Label_open", resourceCulture);
             }
         }
         
@@ -232,11 +250,56 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current switch ID: .
+        /// </summary>
+        public static string Label_switch_current_id {
+            get {
+                return ResourceManager.GetString("Label_switch_current_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current switch state:.
+        /// </summary>
+        public static string Label_switch_current_state {
+            get {
+                return ResourceManager.GetString("Label_switch_current_state", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete switch.
         /// </summary>
         public static string Label_switch_delete {
             get {
                 return ResourceManager.GetString("Label_switch_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit switch.
+        /// </summary>
+        public static string Label_switch_edit {
+            get {
+                return ResourceManager.GetString("Label_switch_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New switch ID:.
+        /// </summary>
+        public static string Label_switch_new_id {
+            get {
+                return ResourceManager.GetString("Label_switch_new_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New switch state:.
+        /// </summary>
+        public static string Label_switch_new_state {
+            get {
+                return ResourceManager.GetString("Label_switch_new_state", resourceCulture);
             }
         }
         

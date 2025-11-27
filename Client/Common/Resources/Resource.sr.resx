@@ -123,6 +123,9 @@
   <data name="Label_cancel" xml:space="preserve">
     <value>Prekini</value>
   </data>
+  <data name="Label_closed" xml:space="preserve">
+    <value>Zatvoren</value>
+  </data>
   <data name="Label_end_date" xml:space="preserve">
     <value>Datum završetka: </value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Label_name" xml:space="preserve">
     <value>Ime zahteva: </value>
+  </data>
+  <data name="Label_open" xml:space="preserve">
+    <value>Otvoren</value>
   </data>
   <data name="Label_operator_name" xml:space="preserve">
     <value>Ime operatera: </value>
@@ -174,8 +180,23 @@
   <data name="Label_switch_add" xml:space="preserve">
     <value>Dodaj prekidač</value>
   </data>
+  <data name="Label_switch_current_id" xml:space="preserve">
+    <value>Trenutni ID prekidaca: </value>
+  </data>
+  <data name="Label_switch_current_state" xml:space="preserve">
+    <value>Trenutno stanje prekidaca: </value>
+  </data>
   <data name="Label_switch_delete" xml:space="preserve">
     <value>Obriši prekidač</value>
+  </data>
+  <data name="Label_switch_edit" xml:space="preserve">
+    <value>Izmeni prekidac</value>
+  </data>
+  <data name="Label_switch_new_id" xml:space="preserve">
+    <value>Novi ID prekidaca</value>
+  </data>
+  <data name="Label_switch_new_state" xml:space="preserve">
+    <value>Novo stanje prekidaca: </value>
   </data>
   <data name="Label_work_plans" xml:space="preserve">
     <value>Zahtevi</value>
