@@ -9,6 +9,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GraphX" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.ServiceModel.Http" Version="8.*" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="8.*" />

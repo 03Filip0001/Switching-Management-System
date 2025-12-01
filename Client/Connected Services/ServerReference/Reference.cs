@@ -268,6 +268,110 @@ namespace ServerReference
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Substation", Namespace="")]
+    public partial class Substation : object
+    {
+        
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Feeder> FeedersField;
+        
+        private int IDField;
+        
+        private string NameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Feeder> Feeders
+        {
+            get
+            {
+                return this.FeedersField;
+            }
+            set
+            {
+                this.FeedersField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID
+        {
+            get
+            {
+                return this.IDField;
+            }
+            set
+            {
+                this.IDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Feeder", Namespace="")]
+    public partial class Feeder : object
+    {
+        
+        private int IDField;
+        
+        private string NameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<ServerReference.Switch> SwitchesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID
+        {
+            get
+            {
+                return this.IDField;
+            }
+            set
+            {
+                this.IDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Switch> Switches
+        {
+            get
+            {
+                return this.SwitchesField;
+            }
+            set
+            {
+                this.SwitchesField = value;
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServerReference.IService1")]
     public interface IService1
@@ -302,6 +406,30 @@ namespace ServerReference
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
         System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubstations", ReplyAction="http://tempuri.org/IService1/GetSubstationsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation> GetSubstations();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubstations", ReplyAction="http://tempuri.org/IService1/GetSubstationsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation>> GetSubstationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveSubstation", ReplyAction="http://tempuri.org/IService1/SaveSubstationResponse")]
+        bool SaveSubstation(ServerReference.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveSubstation", ReplyAction="http://tempuri.org/IService1/SaveSubstationResponse")]
+        System.Threading.Tasks.Task<bool> SaveSubstationAsync(ServerReference.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditSubstation", ReplyAction="http://tempuri.org/IService1/EditSubstationResponse")]
+        bool EditSubstation(ServerReference.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditSubstation", ReplyAction="http://tempuri.org/IService1/EditSubstationResponse")]
+        System.Threading.Tasks.Task<bool> EditSubstationAsync(ServerReference.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewSubstationUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewSubstationUniqueIDResponse")]
+        int GetNewSubstationUniqueID();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewSubstationUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewSubstationUniqueIDResponse")]
+        System.Threading.Tasks.Task<int> GetNewSubstationUniqueIDAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
@@ -402,6 +530,46 @@ namespace ServerReference
         public System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync()
         {
             return base.Channel.GetNewWorkPlanUniqueIDAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation> GetSubstations()
+        {
+            return base.Channel.GetSubstations();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation>> GetSubstationsAsync()
+        {
+            return base.Channel.GetSubstationsAsync();
+        }
+        
+        public bool SaveSubstation(ServerReference.Substation substation)
+        {
+            return base.Channel.SaveSubstation(substation);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SaveSubstationAsync(ServerReference.Substation substation)
+        {
+            return base.Channel.SaveSubstationAsync(substation);
+        }
+        
+        public bool EditSubstation(ServerReference.Substation substation)
+        {
+            return base.Channel.EditSubstation(substation);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditSubstationAsync(ServerReference.Substation substation)
+        {
+            return base.Channel.EditSubstationAsync(substation);
+        }
+        
+        public int GetNewSubstationUniqueID()
+        {
+            return base.Channel.GetNewSubstationUniqueID();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetNewSubstationUniqueIDAsync()
+        {
+            return base.Channel.GetNewSubstationUniqueIDAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
