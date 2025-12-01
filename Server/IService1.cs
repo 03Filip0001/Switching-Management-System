@@ -28,6 +28,18 @@ namespace Server
 
         [OperationContract]
         int GetNewWorkPlanUniqueID();
+
+        [OperationContract]
+        ObservableCollection<CommonLibrarySE.Substation> GetSubstations();
+
+        [OperationContract]
+        bool SaveSubstation(CommonLibrarySE.Substation substation);
+
+        [OperationContract]
+        bool EditSubstation(CommonLibrarySE.Substation substation);
+
+        [OperationContract]
+        int GetNewSubstationUniqueID();
     }
 
 

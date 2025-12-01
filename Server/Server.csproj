@@ -41,8 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonLibrarySE">
-      <HintPath>..\WorkPlanClass\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
+    <Reference Include="CommonLibrarySE, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CommonLibrarySE\bin\Debug\netstandard2.0\CommonLibrarySE.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />

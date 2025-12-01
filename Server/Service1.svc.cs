@@ -19,14 +19,23 @@ namespace Server
     public class Service1 : IService1
     {
         private static int _lastWorkPlanID;
+        private static int _lastSubstationID;
+
         private static readonly string pathWorkPlansData;// = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
         private static readonly string pathWorkPlanID;// = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
+
+        private static readonly string pathSubstationsData;// = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
+        private static readonly string pathSubstationID;// = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
 
         static Service1()
         {
             pathWorkPlansData = HostingEnvironment.MapPath("~/App_Data/WorkPlans.xml");
             pathWorkPlanID = HostingEnvironment.MapPath("~/App_Data/WorkPlanID.txt");
-            
+
+            pathSubstationsData = HostingEnvironment.MapPath("~/App_Data/Substations.xml");
+            pathSubstationID = HostingEnvironment.MapPath("~/App_Data/SubstationID.txt");
+
+
             if (File.Exists(pathWorkPlanID) && new FileInfo(pathWorkPlanID).Length > 0)
             {
                 string content = File.ReadAllText(pathWorkPlanID);
@@ -36,6 +45,17 @@ namespace Server
             {
                 _lastWorkPlanID = 0;
                 File.WriteAllText(pathWorkPlanID, _lastWorkPlanID.ToString());
+            }
+
+            if (File.Exists(pathSubstationID) && new FileInfo(pathSubstationID).Length > 0)
+            {
+                string content = File.ReadAllText(pathSubstationID);
+                int.TryParse(content, out _lastSubstationID);
+            }
+            else
+            {
+                _lastSubstationID = 0;
+                File.WriteAllText(pathSubstationID, _lastSubstationID.ToString());
             }
         }
         public Service1() { }
@@ -123,6 +143,88 @@ namespace Server
             int newID = Interlocked.Increment(ref _lastWorkPlanID);
             File.WriteAllText(pathWorkPlanID, _lastWorkPlanID.ToString());
             return _lastWorkPlanID;
+        }
+
+        public ObservableCollection<CommonLibrarySE.Substation> GetSubstations()
+        {
+            ObservableCollection<CommonLibrarySE.Substation> subs = new ObservableCollection<CommonLibrarySE.Substation> ();
+            subs.Add(new CommonLibrarySE.Substation
+            {
+                ID = 0,
+                Name = "SE",
+                Feeders = new ObservableCollection<CommonLibrarySE.Feeder>(),
+            });
+
+            return subs;
+
+            ObservableCollection<CommonLibrarySE.Substation> SubstationCollection = null;
+            var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
+
+            if (File.Exists(pathSubstationsData) && new FileInfo(pathSubstationsData).Length > 0)
+            {
+                using (var stream = File.OpenRead(pathWorkPlansData))
+                {
+                    SubstationCollection = (ObservableCollection<CommonLibrarySE.Substation>)serializer.ReadObject(stream);
+                }
+            }
+            else
+            {
+                SubstationCollection = new ObservableCollection<CommonLibrarySE.Substation>();
+            }
+
+            return SubstationCollection;
+        }
+
+        public bool SaveSubstation(CommonLibrarySE.Substation substation)
+        {
+            try
+            {
+                ObservableCollection<CommonLibrarySE.Substation> SubstationCollection;
+                var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
+                var settings = new XmlWriterSettings { Indent = true };
+
+                Debug.WriteLine("Checking if file exists");
+                if (File.Exists(pathSubstationsData) && new FileInfo(pathSubstationsData).Length > 0)
+                {
+                    using (var stream = File.OpenRead(pathSubstationsData))
+                    {
+                        Debug.WriteLine("Reading xaml file...");
+                        SubstationCollection = (ObservableCollection<CommonLibrarySE.Substation>)serializer.ReadObject(stream);
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("Creating new list...");
+                    SubstationCollection = new ObservableCollection<CommonLibrarySE.Substation>();
+                }
+
+                Debug.WriteLine("Adding new work plan before saving...");
+                SubstationCollection.Add(substation);
+                using (var writer = XmlWriter.Create(pathSubstationsData, settings))
+                {
+                    Debug.WriteLine("Saving new work plans to xaml...");
+                    serializer.WriteObject(writer, SubstationCollection);
+                }
+
+                return true;
+            }
+            catch
+            {
+                Debug.WriteLine("ERROR SAVING NEW SUBSTATION");
+                return false;
+            }
+        }
+
+        public bool EditSubstation(CommonLibrarySE.Substation substation)
+        {
+            return false;
+        }
+
+        public int GetNewSubstationUniqueID()
+        {
+            int newID = Interlocked.Increment(ref _lastSubstationID);
+            File.WriteAllText(pathSubstationID, _lastSubstationID.ToString());
+            return _lastSubstationID;
         }
     }
 }
