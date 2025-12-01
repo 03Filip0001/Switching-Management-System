@@ -58,6 +58,9 @@
     <None Include="Connected Services\Server\ServerTest.Server.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\Server\ServerTest.Server.Substation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\Server\ServerTest.Server.WorkPlan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

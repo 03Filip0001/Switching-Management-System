@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ServerTest
@@ -10,39 +11,29 @@ namespace ServerTest
         static void Main(string[] args)
         {
             Server.Service1Client client = new Server.Service1Client();
-            ObservableCollection<Server.Instruction> instr = new ObservableCollection<Server.Instruction>
-            {
-                new Server.Instruction
-                {
-                    Number = 1,
-                    Switches = new ObservableCollection<Server.Switch>()
-                },
-                new Server.Instruction
-                {
-                    Number = 2,
-                    Switches = new ObservableCollection<Server.Switch>()
-                }
-            };
 
-            Server.WorkPlan plan = new Server.WorkPlan
-            {
-                ID = 1,
-                StartDate = "123",
-                EndDate = "321",
-                Name = "se",
-                OperatorName = "filip",
-                OperatorSurname = "gold",
-                Instructions = instr,
-                State = Server.WorkPlanStates.Draft,
-            };
+            ObservableCollection<Server.Substation> substations = client.GetSubstations();
 
-            if (client.SaveWorkPlan(plan))
+            substations[0].Feeders = new ObservableCollection<Server.Feeder>();
+
+            Server.Switch s1 = new Server.Switch { Switch_ID = 1};
+            Server.Switch s2 = new Server.Switch { Switch_ID = 2};
+            Server.Feeder f1 = new Server.Feeder { ID = 0, Name = "test", Switches = new ObservableCollection<Server.Switch>()};
+            f1.Switches.Add(s1);
+            f1.Switches.Add(s2);
+
+            substations[0].Feeders.Add(f1);
+
+            bool res = client.SaveSubstation(substations[0]);
+            client.Close();
+
+            if (res == true)
             {
-                Console.WriteLine("saved");
+                Debug.Print("Successfully saved new Substation");
             }
             else
             {
-                Console.WriteLine("NOT SAVED");
+                Debug.Print("COULD NOT SAVE SUBSTATION");
             }
         }
     }

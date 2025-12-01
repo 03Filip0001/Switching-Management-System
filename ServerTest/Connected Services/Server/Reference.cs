@@ -370,6 +370,160 @@ namespace ServerTest.Server {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Substation", Namespace="")]
+    [System.SerializableAttribute()]
+    public partial class Substation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Feeder> FeedersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Feeder> Feeders {
+            get {
+                return this.FeedersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FeedersField, value) != true)) {
+                    this.FeedersField = value;
+                    this.RaisePropertyChanged("Feeders");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Feeder", Namespace="")]
+    [System.SerializableAttribute()]
+    public partial class Feeder : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Switch> SwitchesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Switch> Switches {
+            get {
+                return this.SwitchesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SwitchesField, value) != true)) {
+                    this.SwitchesField = value;
+                    this.RaisePropertyChanged("Switches");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Server.IService1")]
     public interface IService1 {
@@ -403,6 +557,24 @@ namespace ServerTest.Server {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
         System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubstations", ReplyAction="http://tempuri.org/IService1/GetSubstationsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Substation> GetSubstations();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubstations", ReplyAction="http://tempuri.org/IService1/GetSubstationsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Substation>> GetSubstationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveSubstation", ReplyAction="http://tempuri.org/IService1/SaveSubstationResponse")]
+        bool SaveSubstation(ServerTest.Server.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveSubstation", ReplyAction="http://tempuri.org/IService1/SaveSubstationResponse")]
+        System.Threading.Tasks.Task<bool> SaveSubstationAsync(ServerTest.Server.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditSubstation", ReplyAction="http://tempuri.org/IService1/EditSubstationResponse")]
+        bool EditSubstation(ServerTest.Server.Substation substation);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditSubstation", ReplyAction="http://tempuri.org/IService1/EditSubstationResponse")]
+        System.Threading.Tasks.Task<bool> EditSubstationAsync(ServerTest.Server.Substation substation);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -470,6 +642,30 @@ namespace ServerTest.Server {
         
         public System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync() {
             return base.Channel.GetNewWorkPlanUniqueIDAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Substation> GetSubstations() {
+            return base.Channel.GetSubstations();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<ServerTest.Server.Substation>> GetSubstationsAsync() {
+            return base.Channel.GetSubstationsAsync();
+        }
+        
+        public bool SaveSubstation(ServerTest.Server.Substation substation) {
+            return base.Channel.SaveSubstation(substation);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SaveSubstationAsync(ServerTest.Server.Substation substation) {
+            return base.Channel.SaveSubstationAsync(substation);
+        }
+        
+        public bool EditSubstation(ServerTest.Server.Substation substation) {
+            return base.Channel.EditSubstation(substation);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditSubstationAsync(ServerTest.Server.Substation substation) {
+            return base.Channel.EditSubstationAsync(substation);
         }
     }
 }

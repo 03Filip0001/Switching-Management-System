@@ -54,4 +54,32 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="WorkPlanStates" nillable="true" type="WorkPlanStates" />
+  <xs:complexType name="ArrayOfSubstation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Substation" nillable="true" type="Substation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSubstation" nillable="true" type="ArrayOfSubstation" />
+  <xs:complexType name="Substation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Feeders" nillable="true" type="ArrayOfFeeder" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Substation" nillable="true" type="Substation" />
+  <xs:complexType name="ArrayOfFeeder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Feeder" nillable="true" type="Feeder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeeder" nillable="true" type="ArrayOfFeeder" />
+  <xs:complexType name="Feeder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Switches" nillable="true" type="ArrayOfSwitch" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Feeder" nillable="true" type="Feeder" />
 </xs:schema>
