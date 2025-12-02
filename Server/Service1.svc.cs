@@ -147,22 +147,12 @@ namespace Server
 
         public ObservableCollection<CommonLibrarySE.Substation> GetSubstations()
         {
-            ObservableCollection<CommonLibrarySE.Substation> subs = new ObservableCollection<CommonLibrarySE.Substation> ();
-            subs.Add(new CommonLibrarySE.Substation
-            {
-                ID = 0,
-                Name = "SE",
-                Feeders = new ObservableCollection<CommonLibrarySE.Feeder>(),
-            });
-
-            return subs;
-
             ObservableCollection<CommonLibrarySE.Substation> SubstationCollection = null;
             var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
 
             if (File.Exists(pathSubstationsData) && new FileInfo(pathSubstationsData).Length > 0)
             {
-                using (var stream = File.OpenRead(pathWorkPlansData))
+                using (var stream = File.OpenRead(pathSubstationsData))
                 {
                     SubstationCollection = (ObservableCollection<CommonLibrarySE.Substation>)serializer.ReadObject(stream);
                 }

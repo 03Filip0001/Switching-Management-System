@@ -11,8 +11,17 @@
         xmlns:controls="http://schemas.panthernet.ru/graphx/"
 
         Title="MainWindow" Height="450" Width="800">
-    
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/Templates/SubstationVertexTemplate.xaml" />
+                <ResourceDictionary Source="/Common/Templates/FeederVertexTemplate.xaml" />
+                <ResourceDictionary Source="/Common/Templates/SwitchVertexTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -109,101 +118,11 @@
         <GridSplitter Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
         <Grid Grid.Column="2" Grid.Row="1">
-            <wpf:DataGraphArea x:Name="tg_Area">
-                <wpf:DataGraphArea.Resources>
-                    <ResourceDictionary>
-                        <!-- VERTEX CONTROL -->
-                        <Style TargetType="{x:Type controls:VertexControl}">
-                            <!-- Set background color through attached property -->
-                            <Setter Property="Background" Value="LightGray"/>
-                            <Setter Property="Padding" Value="10,5,10,5"/>
-                            <Setter Property="BorderBrush" Value="Black"/>
-                            <Setter Property="BorderThickness" Value="3"/>
-
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type controls:VertexControl}">
-                                        <ControlTemplate.Resources>
-                                            <Storyboard x:Key="HoverOn">
-                                                <DoubleAnimation Duration="00:00:00.1000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Opacity" To="1" />
-                                                <DoubleAnimation Duration="00:00:00.1000000" Storyboard.TargetName="BackgroundOver_Highlight" Storyboard.TargetProperty="Opacity" To="0.65" />
-                                            </Storyboard>
-                                            <Storyboard x:Key="HoverOff">
-                                                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Opacity" To="0" />
-                                                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver_Highlight" Storyboard.TargetProperty="Opacity" To="0" />
-                                            </Storyboard>
-                                        </ControlTemplate.Resources>
-
-                                        <Grid>
-                                            <Border x:Name="BackgroundNorm" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"/>
-                                            <Border x:Name="BackgroundNorm_highlight" Margin="1" BorderBrush="White" BorderThickness="1,0,1,1" CornerRadius="5" Opacity="0.65" />
-                                            <Border x:Name="BackgroundOver" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Opacity="0" Background="LightYellow" BorderBrush="Orange"/>
-                                            <Border x:Name="BackgroundOver_Highlight" Margin="1" BorderThickness="1,0,1,1" CornerRadius="5" Opacity="0" BorderBrush="Yellow"/>
-
-                                            <Grid >
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <!-- <Image Source="{Binding ImageId, Converter={StaticResource ValueToImage}}" Margin="3"  Width="60" Stretch="UniformToFill" Grid.RowSpan="2"/> -->
-                                                <Label Content="{Binding ID}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3" MinWidth="120"/>
-                                                <Label Content="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3" MinWidth="120"/>
-                                            </Grid>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="true">
-                                                <Trigger.ExitActions>
-                                                    <BeginStoryboard Storyboard="{StaticResource HoverOff}" x:Name="HoverOff_BeginStoryboard" />
-                                                </Trigger.ExitActions>
-                                                <Trigger.EnterActions>
-                                                    <BeginStoryboard Storyboard="{StaticResource HoverOn}" />
-                                                </Trigger.EnterActions>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-
-                            </Setter>
-
-                            <Setter Property="ToolTip">
-                                <Setter.Value>
-                                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="8" Background="LightGray" UseLayoutRounding="True">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="Additional info:" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
-                                            <StackPanel Orientation="Horizontal" Margin="3">
-                                                <TextBlock MinWidth="70" Text="Substation ID: " VerticalAlignment="Center"/>
-                                                <TextBlock FontWeight="Bold" Text="{Binding ID}" Margin="3" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="3">
-                                                <TextBlock MinWidth="70" Text="Substation name: " VerticalAlignment="Center"/>
-                                                <TextBlock FontWeight="Bold" Text="{Binding Name}" Margin="3" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </Border>
-                                </Setter.Value>
-                            </Setter>
-                            
-                            <!-- VERTEX DRAGGING CONTROL -->
-                            <Setter Property="controls:DragBehaviour.IsDragEnabled"
-                                    Value="False" />
-                            <Setter Property="controls:DragBehaviour.UpdateEdgesOnMove"
-                                    Value="True" />
-
-
-                            <Style.Triggers>
-                                <Trigger Property="controls:HighlightBehaviour.Highlighted" Value="True">
-                                    <Setter Property="BorderBrush" Value="Gold"/>
-                                    <Setter Property="BorderThickness" Value="7"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ResourceDictionary>
-                </wpf:DataGraphArea.Resources>
-            </wpf:DataGraphArea>
+            <controls:ZoomControl>
+                <wpf:DataGraphArea x:Name="tg_Area">
+                
+                </wpf:DataGraphArea>
+            </controls:ZoomControl>
         </Grid>
 
     </Grid>

@@ -2,6 +2,7 @@
 using GraphX.Controls;
 using GraphX.Controls.Models;
 using Mini_Switching_Management_System_Client.Model;
+using Mini_Switching_Management_System_Client.Model.DTOMappers;
 using Mini_Switching_Management_System_Client.ViewModel;
 using System.Globalization;
 using System.Windows;
@@ -18,9 +19,6 @@ namespace Mini_Switching_Management_System_Client
             InitializeComponent();
             MainWindowViewModel vm = new MainWindowViewModel();
             DataContext = vm;
-
-            //ServerReference.Service1Client client = new ServerReference.Service1Client();
-            //var res = client.GetSubstations();
 
             var logic = new DataLogicCore();
             tg_Area.LogicCore = logic;
@@ -82,10 +80,44 @@ namespace Mini_Switching_Management_System_Client
             ServerReference.Service1Client client = new ServerReference.Service1Client();
             var res = client.GetSubstations();
 
-            var graph = new Graph();
-            graph.AddVertex(new DataVertex { ID = res[0].ID, Name = res[0].Name });
+            List<CommonLibrarySE.Substation> sub = DTOMapper.Substation.ToSubstation(res);
 
+            var graph = new Graph();
+
+            foreach (var subitem in sub)
+            {
+                graph.AddVertex(new DataVertex { ID = subitem.ID, Name = subitem.Name, VertexType = VertexTypes.SUBSTATION });
+                foreach (var feeder in subitem.Feeders)
+                {
+                    graph.AddVertex(new DataVertex { ID = feeder.ID, Name = feeder.Name, VertexType = VertexTypes.FEEDER });
+                    foreach (var sw in feeder.Switches)
+                    {
+                        graph.AddVertex(new DataVertex { ID = sw.ID, State = sw.State, VertexType = VertexTypes.SWITCH });
+                    }
+                }
+            }
             tg_Area.GenerateGraph(graph);
+
+            foreach (var kvp in tg_Area.VertexList)
+            {
+                var vertex = kvp.Key;          // DataVertex
+                var vc = kvp.Value;        // VertexControl
+
+                switch (vertex.VertexType)
+                {
+                    case VertexTypes.SUBSTATION:
+                        vc.Style = (Style)FindResource("SubstationVertexStyle");
+                        break;
+
+                    case VertexTypes.FEEDER:
+                        vc.Style = (Style)FindResource("FeederVertexStyle");
+                        break;
+
+                    case VertexTypes.SWITCH:
+                        vc.Style = (Style)FindResource("SwitchVertexStyle");
+                        break;
+                }
+            }
         }
     }
 }
