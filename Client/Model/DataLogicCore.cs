@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mini_Switching_Management_System_Client.Model
 {
-    public class SubstationLogicCore : GXLogicCore<SubstationVertex, SubstationEdge, BidirectionalGraph<SubstationVertex, SubstationEdge>>
+    public class DataLogicCore : GXLogicCore<DataVertex, SubstationEdge, BidirectionalGraph<DataVertex, SubstationEdge>>
     {
     }
 }

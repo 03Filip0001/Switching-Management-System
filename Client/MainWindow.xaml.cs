@@ -22,7 +22,7 @@ namespace Mini_Switching_Management_System_Client
             //ServerReference.Service1Client client = new ServerReference.Service1Client();
             //var res = client.GetSubstations();
 
-            var logic = new SubstationLogicCore();
+            var logic = new DataLogicCore();
             tg_Area.LogicCore = logic;
             logic.DefaultLayoutAlgorithm = LayoutAlgorithmTypeEnum.KK;
             logic.DefaultOverlapRemovalAlgorithm = OverlapRemovalAlgorithmTypeEnum.FSA;
@@ -83,7 +83,7 @@ namespace Mini_Switching_Management_System_Client
             var res = client.GetSubstations();
 
             var graph = new Graph();
-            graph.AddVertex(new SubstationVertex { ID = res[0].ID, Name = res[0].Name });
+            graph.AddVertex(new DataVertex { ID = res[0].ID, Name = res[0].Name });
 
             tg_Area.GenerateGraph(graph);
         }

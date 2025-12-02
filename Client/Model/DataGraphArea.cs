@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mini_Switching_Management_System_Client.Model
 {
-    public class SubstationGraphArea : GraphArea<SubstationVertex, SubstationEdge, BidirectionalGraph<SubstationVertex, SubstationEdge>>
+    public class DataGraphArea : GraphArea<DataVertex, SubstationEdge, BidirectionalGraph<DataVertex, SubstationEdge>>
     {
     }
 }
