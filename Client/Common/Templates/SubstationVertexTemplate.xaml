@@ -2,8 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
                     xmlns:wpf="clr-namespace:Mini_Switching_Management_System_Client.Model"
-                    xmlns:controls="http://schemas.panthernet.ru/graphx/">
+                    xmlns:controls="http://schemas.panthernet.ru/graphx/"
+                    xmlns:conv="clr-namespace:Mini_Switching_Management_System_Client.Common.Converter">
 
+    <conv:MultiplyConverter x:Key="MultiplyBy2" Factor="2.5"/>
     <!-- VERTEX CONTROL -->
     <Style TargetType="{x:Type controls:VertexControl}" x:Key="SubstationVertexStyle">
         <!-- Set background color through attached property -->
@@ -41,7 +43,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel>
+                            <StackPanel Height="66" Width="{Binding RelativeSource={RelativeSource Self},
+                                                             Path=Height,
+                                                             Converter={StaticResource MultiplyBy2}}">
                                 <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
                                 <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3"/>
                             </StackPanel>

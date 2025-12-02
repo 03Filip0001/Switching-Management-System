@@ -2,7 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
                     xmlns:wpf="clr-namespace:Mini_Switching_Management_System_Client.Model"
-                    xmlns:controls="http://schemas.panthernet.ru/graphx/">
+                    xmlns:controls="http://schemas.panthernet.ru/graphx/"                
+                    xmlns:conv="clr-namespace:Mini_Switching_Management_System_Client.Common.Converter">
+
+    <conv:MultiplyConverter x:Key="MultiplyBy1" Factor="1"/>
 
     <!-- VERTEX CONTROL -->
     <Style TargetType="{x:Type controls:VertexControl}" x:Key="FeederVertexStyle">
@@ -41,7 +44,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel>
+                            <StackPanel Height="66" Width="{Binding RelativeSource={RelativeSource Self},
+                                                             Path=Height,
+                                                             Converter={StaticResource MultiplyBy1}}">
                                 <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
                                 <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3"/>
                             </StackPanel>
