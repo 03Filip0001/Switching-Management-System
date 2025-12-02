@@ -8,6 +8,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 {
     internal class MainWindowViewModel : NotifyPropertyChanged
     {
+        public event Action? RefreshGraphRequested;
         public RelayCommand Button_Menu_AddWorkPlan => new RelayCommand(execute => AddWorkPlan(), canExecute => { return true; });
         public RelayCommand Button_Refresh => new RelayCommand(execute => RefreshWorkPlans());
 
@@ -36,6 +37,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
 
         private void RefreshWorkPlans()
         {
+            RefreshGraphRequested?.Invoke();
             ServerReference.Service1Client serverClient = new ServerReference.Service1Client();
             ObservableCollection<ServerReference.WorkPlan> workPlans = serverClient.GetWorkPlans();
 

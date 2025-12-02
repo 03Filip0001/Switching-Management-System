@@ -150,8 +150,8 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <!-- <Image Source="{Binding ImageId, Converter={StaticResource ValueToImage}}" Margin="3"  Width="60" Stretch="UniformToFill" Grid.RowSpan="2"/> -->
-                                                <Label Content="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3" MinWidth="120"/>
-                                                <TextBlock Text="{Binding Profession}" TextAlignment="Center" FontStyle="Italic" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="1" Margin="3"/>
+                                                <Label Content="{Binding ID}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3" MinWidth="120"/>
+                                                <Label Content="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3" MinWidth="120"/>
                                             </Grid>
                                         </Grid>
                                         <ControlTemplate.Triggers>
@@ -173,13 +173,13 @@
                                 <Setter.Value>
                                     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="8" Background="LightGray" UseLayoutRounding="True">
                                         <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="Additional person info:" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+                                            <TextBlock Text="Additional info:" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
                                             <StackPanel Orientation="Horizontal" Margin="3">
-                                                <TextBlock MinWidth="70" Text="Name: " VerticalAlignment="Center"/>
+                                                <TextBlock MinWidth="70" Text="Substation ID: " VerticalAlignment="Center"/>
                                                 <TextBlock FontWeight="Bold" Text="{Binding ID}" Margin="3" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Margin="3">
-                                                <TextBlock MinWidth="70" Text="Occupation: " VerticalAlignment="Center"/>
+                                                <TextBlock MinWidth="70" Text="Substation name: " VerticalAlignment="Center"/>
                                                 <TextBlock FontWeight="Bold" Text="{Binding Name}" Margin="3" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </StackPanel>

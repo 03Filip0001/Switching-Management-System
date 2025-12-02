@@ -19,8 +19,8 @@ namespace Mini_Switching_Management_System_Client
             MainWindowViewModel vm = new MainWindowViewModel();
             DataContext = vm;
 
-            ServerReference.Service1Client client = new ServerReference.Service1Client();
-            var res = client.GetSubstations();
+            //ServerReference.Service1Client client = new ServerReference.Service1Client();
+            //var res = client.GetSubstations();
 
             var logic = new SubstationLogicCore();
             tg_Area.LogicCore = logic;
@@ -36,6 +36,8 @@ namespace Mini_Switching_Management_System_Client
             tg_Area.VertexSelected += tg_Area_VertexSelected;
             tg_Area.GenerateGraphFinished += tg_Area_GenerateGraphFinished;
             tg_Area.RelayoutFinished += tg_Area_RelayoutFinished;
+
+            vm.RefreshGraphRequested += () => RefreshGraph();
         }
 
         void tg_Area_VertexSelected(object sender, VertexSelectedEventArgs args)
@@ -73,6 +75,17 @@ namespace Mini_Switching_Management_System_Client
 
             tg_Area.SetEdgesDashStyle(EdgeDashStyle.Dash);
             //tg_zoomctrl.ZoomToFill();// ZoomToFill(); //manually update zoom control to fill the area
+        }
+
+        void RefreshGraph()
+        {
+            ServerReference.Service1Client client = new ServerReference.Service1Client();
+            var res = client.GetSubstations();
+
+            var graph = new Graph();
+            graph.AddVertex(new SubstationVertex { ID = res[0].ID, Name = res[0].Name });
+
+            tg_Area.GenerateGraph(graph);
         }
     }
 }
