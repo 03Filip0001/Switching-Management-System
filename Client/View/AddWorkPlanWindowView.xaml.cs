@@ -1,4 +1,5 @@
-﻿using Mini_Switching_Management_System_Client.ViewModel;
+﻿using Mini_Switching_Management_System_Client.Model.Binding;
+using Mini_Switching_Management_System_Client.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace Mini_Switching_Management_System_Client.View
         {
             InitializeComponent();
             AddWorkPlanViewModel addWP = new AddWorkPlanViewModel();
+            DataContext = addWP;
+            addWP.RequestClose += () => this.Close();
+        }
+
+        public AddWorkPlanWindow(WorkPlanDTO wp)
+        {
+            InitializeComponent();
+            AddWorkPlanViewModel addWP = new AddWorkPlanViewModel(wp);
             DataContext = addWP;
             addWP.RequestClose += () => this.Close();
         }

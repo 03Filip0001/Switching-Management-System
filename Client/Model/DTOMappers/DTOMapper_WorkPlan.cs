@@ -13,6 +13,15 @@ namespace Mini_Switching_Management_System_Client.Model.DTOMappers
 
                 foreach (var workPlan in wp)
                 {
+                    ObservableCollection<InstructionDTO> instructions = new ObservableCollection<InstructionDTO>();
+                    foreach (var instr in workPlan.Instructions) {
+                        ObservableCollection<SwitchDTO> switches = new ObservableCollection<SwitchDTO>();
+                        foreach(var sw in instr.Switches)
+                        {
+                            switches.Add(new SwitchDTO { ID=sw.Switch_ID, State = sw.State });
+                        }
+                        instructions.Add(new InstructionDTO { Number = instr.Number, Switches=switches});
+                    }
                     wpClient.Add(new WorkPlanDTO
                     {
                         ID = workPlan.ID,
@@ -22,10 +31,7 @@ namespace Mini_Switching_Management_System_Client.Model.DTOMappers
                         OperatorSurname = workPlan.OperatorSurname,
                         StartDate = workPlan.StartDate,
                         EndDate = workPlan.EndDate,
-                        Instructions = new ObservableCollection<InstructionDTO>
-                        {
-
-                        }
+                        Instructions = instructions
                     });
                 }
 

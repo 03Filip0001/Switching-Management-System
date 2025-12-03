@@ -268,6 +268,21 @@ namespace ServerReference
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkPlanActions", Namespace="")]
+    public enum WorkPlanActions : int
+    {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Check = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Execute = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Delete = 2,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Substation", Namespace="")]
@@ -407,6 +422,12 @@ namespace ServerReference
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetNewWorkPlanUniqueID", ReplyAction="http://tempuri.org/IService1/GetNewWorkPlanUniqueIDResponse")]
         System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/WorkPlanAction", ReplyAction="http://tempuri.org/IService1/WorkPlanActionResponse")]
+        bool WorkPlanAction(int ID, ServerReference.WorkPlanActions action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/WorkPlanAction", ReplyAction="http://tempuri.org/IService1/WorkPlanActionResponse")]
+        System.Threading.Tasks.Task<bool> WorkPlanActionAsync(int ID, ServerReference.WorkPlanActions action);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubstations", ReplyAction="http://tempuri.org/IService1/GetSubstationsResponse")]
         System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation> GetSubstations();
         
@@ -530,6 +551,16 @@ namespace ServerReference
         public System.Threading.Tasks.Task<int> GetNewWorkPlanUniqueIDAsync()
         {
             return base.Channel.GetNewWorkPlanUniqueIDAsync();
+        }
+        
+        public bool WorkPlanAction(int ID, ServerReference.WorkPlanActions action)
+        {
+            return base.Channel.WorkPlanAction(ID, action);
+        }
+        
+        public System.Threading.Tasks.Task<bool> WorkPlanActionAsync(int ID, ServerReference.WorkPlanActions action)
+        {
+            return base.Channel.WorkPlanActionAsync(ID, action);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<ServerReference.Substation> GetSubstations()

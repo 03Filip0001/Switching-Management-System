@@ -1,9 +1,10 @@
 ﻿using CommonLibrarySE;
+using Mini_Switching_Management_System_Client.Common;
 using Mini_Switching_Management_System_Client.Model.Binding;
 using Mini_Switching_Management_System_Client.Model.DTOMappers;
-using Mini_Switching_Management_System_Client.Common;
 using Mini_Switching_Management_System_Client.View;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -94,6 +95,18 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             WorkPlanName = string.Empty;
             OperatorName = string.Empty;
             OperatorSurname = string.Empty;
+        }
+
+        public AddWorkPlanViewModel(WorkPlanDTO wp)
+        {
+            ID = wp.ID;
+            Instructions = wp.Instructions;
+            StartDate = StartDate = DateTime.ParseExact(wp.StartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            EndDate = StartDate = DateTime.ParseExact(wp.EndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            WorkPlanName = wp.Name;
+            OperatorName = wp.OperatorName;
+            OperatorSurname= wp.OperatorSurname;
         }
 
         private void SaveWorkPlan()
