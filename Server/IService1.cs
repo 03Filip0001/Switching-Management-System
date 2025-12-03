@@ -30,6 +30,9 @@ namespace Server
         int GetNewWorkPlanUniqueID();
 
         [OperationContract]
+        bool WorkPlanAction(int ID, WorkPlanActions action);
+
+        [OperationContract]
         ObservableCollection<CommonLibrarySE.Substation> GetSubstations();
 
         [OperationContract]
@@ -44,6 +47,18 @@ namespace Server
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
+
+    [DataContract(Name ="WorkPlanActions", Namespace ="")]
+    public enum WorkPlanActions
+    {
+        [EnumMember]
+        Check,
+        [EnumMember]
+        Execute,
+        [EnumMember]
+        Delete
+    }
+
     [DataContract]
     public class CompositeType
     {

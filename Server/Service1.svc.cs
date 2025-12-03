@@ -4,10 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using System.Threading;
 using System.Web.Hosting;
 using System.Xml;
@@ -78,7 +76,7 @@ namespace Server
             return composite;
         }
 
-        public ObservableCollection<CommonLibrarySE.WorkPlan> GetWorkPlans()
+        private ObservableCollection<CommonLibrarySE.WorkPlan> LoadWorkPlans()
         {
             ObservableCollection<CommonLibrarySE.WorkPlan> workPlanCollection = null;
             var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.WorkPlan>));
@@ -98,38 +96,54 @@ namespace Server
             return workPlanCollection;
         }
 
+        private bool SaveWorkPlans(ObservableCollection<CommonLibrarySE.WorkPlan> wp)
+        {
+            bool res = false;
+
+            var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.WorkPlan>));
+            var settings = new XmlWriterSettings { Indent = true };
+
+            using (var writer = XmlWriter.Create(pathWorkPlansData, settings))
+            {
+                Debug.WriteLine("Saving new work plans to xaml...");
+                serializer.WriteObject(writer, wp);
+                Debug.Write("saved?");
+                res = true;
+            }
+
+            return res;
+        }
+
+        public ObservableCollection<CommonLibrarySE.WorkPlan> GetWorkPlans()
+        {
+            return LoadWorkPlans();
+        }
+
         public bool SaveWorkPlan(CommonLibrarySE.WorkPlan workPlan)
         {
             try
             {
-                ObservableCollection<CommonLibrarySE.WorkPlan> workPlanCollection;
-                var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.WorkPlan>));
-                var settings = new XmlWriterSettings { Indent = true };
+                var workPlanCollection = LoadWorkPlans();
 
-                Debug.WriteLine("Checking if file exists");
-                if (File.Exists(pathWorkPlansData) && new FileInfo(pathWorkPlansData).Length > 0)
+                var foundPlan = workPlanCollection.FirstOrDefault(wp => wp.ID == workPlan.ID);
+                Debug.WriteLine("Adding new work plan before saving...");
+                if (foundPlan != null)
                 {
-                    using (var stream = File.OpenRead(pathWorkPlansData))
+                    Debug.Write("Removing old work plan");
+                    bool res = workPlanCollection.Remove(foundPlan);
+                    if (res)
                     {
-                        Debug.WriteLine("Reading xaml file...");
-                        workPlanCollection = (ObservableCollection<CommonLibrarySE.WorkPlan>)serializer.ReadObject(stream);
+                        Debug.Write("Removed.");
+                    }
+                    else
+                    {
+                        Debug.Write("Could not remove...");
                     }
                 }
-                else
-                {
-                    Debug.WriteLine("Creating new list...");
-                    workPlanCollection = new ObservableCollection<CommonLibrarySE.WorkPlan>();
-                }
 
-                Debug.WriteLine("Adding new work plan before saving...");
                 workPlanCollection.Add(workPlan);
-                using (var writer = XmlWriter.Create(pathWorkPlansData, settings))
-                {
-                    Debug.WriteLine("Saving new work plans to xaml...");
-                    serializer.WriteObject(writer, workPlanCollection);
-                }
-
-                return true;
+                
+                return SaveWorkPlans(workPlanCollection);
             }
             catch
             {
@@ -145,7 +159,167 @@ namespace Server
             return _lastWorkPlanID;
         }
 
-        public ObservableCollection<CommonLibrarySE.Substation> GetSubstations()
+        private bool DeleteWorkPlan(int ID)
+        {
+            bool res = false;
+
+            try
+            {
+                var workPlanCollection = LoadWorkPlans();
+
+                var foundPlan = workPlanCollection.FirstOrDefault(wp => wp.ID == ID);
+                if (foundPlan != null)
+                {
+                    res = workPlanCollection.Remove(foundPlan);
+                    if (res)
+                    {
+                        Debug.Write("Removed.");
+                    }
+                    else
+                    {
+                        Debug.Write("Could not remove...");
+                    }
+                }
+
+                if(res)
+                    res = SaveWorkPlans(workPlanCollection);
+            }
+            catch
+            {
+                Debug.WriteLine("ERROR SAVING NEW WORK PLAN");
+                return false;
+            }
+
+            return res;
+        }
+
+        private bool CheckWorkPlan(int ID)
+        {
+            bool res = false;
+
+            var workPlanCollection = LoadWorkPlans();
+            var substationCollection = LoadSubstations();
+
+            Debug.WriteLine("Checking if work plan with ID" +  ID + " exists...");
+            var foundPlan = workPlanCollection.FirstOrDefault(wp => wp.ID == ID);
+
+            if (foundPlan != null)
+            {
+                Debug.WriteLine("Found work plan.");
+                foreach(var instr in foundPlan.Instructions)
+                {
+                    foreach(var sw in instr.Switches)
+                    {
+                        bool found = false;
+                        foreach (var sub in substationCollection)
+                        {
+                            foreach (var feed in sub.Feeders)
+                            {
+                                found = feed.Switches.Any(fs => fs.ID == sw.ID);
+                                if (found)
+                                {
+                                    Debug.WriteLine("Found switch with ID: " +  sw.ID);
+                                    break;
+                                }
+                            }
+                            if(found) break;
+                        }
+                        if (!found) return false;
+                    }
+                }
+
+                foundPlan.State = CommonLibrarySE.WorkPlanStates.Approved;
+                res = SaveWorkPlan(foundPlan);
+            }
+            else
+            {
+                Debug.WriteLine("Not found work plan");
+            }
+
+                return res;
+        }
+
+        private bool ExecuteWorkPlan(int ID)
+        {
+            bool res = false;
+
+            var workPlanCollection = LoadWorkPlans();
+            var foundPlan = workPlanCollection.FirstOrDefault(wp => wp.ID == ID);
+
+            List<CommonLibrarySE.Switch> updateSwitches = new List<CommonLibrarySE.Switch>();
+
+            if(foundPlan != null)
+            {
+                foreach( var instr in foundPlan.Instructions)
+                {
+                    foreach( var sw in instr.Switches)
+                    {
+                        var update = updateSwitches.FirstOrDefault(wp => wp.ID == sw.ID);
+                        if(update != null)
+                        {
+                            update.State = sw.State;
+                        }
+                        else
+                        {
+                            var newSwitch = new CommonLibrarySE.Switch { ID = sw.ID, State=sw.State};
+                            updateSwitches.Add(newSwitch);
+                        }
+                    }
+                }
+
+                var updateMap = updateSwitches.ToDictionary(s => s.ID, s => s.State);
+                var substations = LoadSubstations();
+                foreach (var sub in substations)
+                {
+                    foreach(var feed in sub.Feeders)
+                    {
+                        foreach (var switchInFeeder in feed.Switches)
+                        {
+                            if (updateMap.TryGetValue(switchInFeeder.ID, out var newState))
+                            {
+                                switchInFeeder.State = newState;
+                            }
+                        }
+                    }
+                }
+
+
+                res = SaveSubstations(substations);
+                if (res)
+                {
+                    res = DeleteWorkPlan(ID);
+                    foundPlan.State = CommonLibrarySE.WorkPlanStates.Executed;
+                    if (res)
+                    {
+                        res = SaveWorkPlan(foundPlan);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        public bool WorkPlanAction(int ID, WorkPlanActions action)
+        {
+            bool res = false;
+            switch(action){
+                case WorkPlanActions.Delete:
+                    res = DeleteWorkPlan(ID);
+                    break;
+                case WorkPlanActions.Check:
+                    res = CheckWorkPlan(ID);
+                    break;
+                case WorkPlanActions.Execute: 
+                    res = ExecuteWorkPlan(ID);
+                    break;
+
+                default:
+                    break;
+            }
+            return res;
+        }
+
+        private ObservableCollection<CommonLibrarySE.Substation> LoadSubstations()
         {
             ObservableCollection<CommonLibrarySE.Substation> SubstationCollection = null;
             var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
@@ -165,38 +339,34 @@ namespace Server
             return SubstationCollection;
         }
 
+        private bool SaveSubstations(ObservableCollection<CommonLibrarySE.Substation> subs)
+        {
+            var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
+            var settings = new XmlWriterSettings { Indent = true };
+            using (var writer = XmlWriter.Create(pathSubstationsData, settings))
+            {
+                Debug.WriteLine("Saving new work plans to xaml...");
+                serializer.WriteObject(writer, subs);
+            }
+
+            return true;
+        }
+
+        public ObservableCollection<CommonLibrarySE.Substation> GetSubstations()
+        {
+            return LoadSubstations();
+        }
+
         public bool SaveSubstation(CommonLibrarySE.Substation substation)
         {
             try
             {
-                ObservableCollection<CommonLibrarySE.Substation> SubstationCollection;
-                var serializer = new DataContractSerializer(typeof(ObservableCollection<CommonLibrarySE.Substation>));
-                var settings = new XmlWriterSettings { Indent = true };
-
-                Debug.WriteLine("Checking if file exists");
-                if (File.Exists(pathSubstationsData) && new FileInfo(pathSubstationsData).Length > 0)
-                {
-                    using (var stream = File.OpenRead(pathSubstationsData))
-                    {
-                        Debug.WriteLine("Reading xaml file...");
-                        SubstationCollection = (ObservableCollection<CommonLibrarySE.Substation>)serializer.ReadObject(stream);
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine("Creating new list...");
-                    SubstationCollection = new ObservableCollection<CommonLibrarySE.Substation>();
-                }
+                ObservableCollection<CommonLibrarySE.Substation> SubstationCollection = LoadSubstations();
 
                 Debug.WriteLine("Adding new work plan before saving...");
                 SubstationCollection.Add(substation);
-                using (var writer = XmlWriter.Create(pathSubstationsData, settings))
-                {
-                    Debug.WriteLine("Saving new work plans to xaml...");
-                    serializer.WriteObject(writer, SubstationCollection);
-                }
 
-                return true;
+                return SaveSubstations(SubstationCollection);
             }
             catch
             {
