@@ -18,7 +18,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
         public RelayCommand Button_CheckWorkPlan => new RelayCommand(execute: wp => CheckWorkPlan(wp), canExecute:wp => { 
             var plan = wp as WorkPlanDTO;
             if (plan == null) return false;
-            return plan.State == CommonLibrarySE.WorkPlanStates.Draft;
+            return plan.State == CommonLibrarySE.WorkPlanStates.Draft || plan.State == CommonLibrarySE.WorkPlanStates.Executed;
         });
         public RelayCommand Button_ExecuteWorkPlan => new RelayCommand(execute: wp => ExecuteWorkPlan(wp), canExecute:wp => {
             var plan = wp as WorkPlanDTO;
@@ -67,7 +67,7 @@ namespace Mini_Switching_Management_System_Client.ViewModel
             var workPlan = param as WorkPlanDTO;
             
             ServerReference.Service1Client client = new ServerReference.Service1Client();
-            bool res = client.WorkPlanAction(workPlan.ID, ServerReference.WorkPlanActions.Execute);
+            bool res = client.WorkPlanAction(workPlan.ID, ServerReference.WorkPlanActions.Check);
             client.Close();
 
             if (res)
