@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
+                    xmlns:res="clr-namespace:Mini_Switching_Management_System_Client.Common.Resources"
+                    
                     xmlns:wpf="clr-namespace:Mini_Switching_Management_System_Client.Model"
                     xmlns:controls="http://schemas.panthernet.ru/graphx/"
                     xmlns:conv="clr-namespace:Mini_Switching_Management_System_Client.Common.Converter">
@@ -9,7 +11,7 @@
     <!-- VERTEX CONTROL -->
     <Style TargetType="{x:Type controls:VertexControl}" x:Key="SubstationVertexStyle">
         <!-- Set background color through attached property -->
-        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Background" Value="LightSkyBlue"/>
         <Setter Property="Padding" Value="10,5,10,5"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
@@ -46,8 +48,15 @@
                             <StackPanel Height="66" Width="{Binding RelativeSource={RelativeSource Self},
                                                              Path=Height,
                                                              Converter={StaticResource MultiplyBy2}}">
-                                <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
-                                <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{x:Static res:Resource.Label_substation}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                    <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{x:Static res:Resource.Label_id}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                    <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>

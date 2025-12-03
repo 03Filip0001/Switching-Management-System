@@ -97,7 +97,16 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work plan ID: .
+        ///   Looks up a localized string similar to Feeder: .
+        /// </summary>
+        public static string Label_feeder {
+            get {
+                return ResourceManager.GetString("Label_feeder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID: .
         /// </summary>
         public static string Label_id {
             get {
@@ -232,6 +241,15 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Substation: .
+        /// </summary>
+        public static string Label_substation {
+            get {
+                return ResourceManager.GetString("Label_substation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Switch.
         /// </summary>
         public static string Label_switch {
@@ -309,6 +327,15 @@ namespace Mini_Switching_Management_System_Client.Common.Resources {
         public static string Label_work_plans {
             get {
                 return ResourceManager.GetString("Label_work_plans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work plan ID: .
+        /// </summary>
+        public static string Label_workplan_id {
+            get {
+                return ResourceManager.GetString("Label_workplan_id", resourceCulture);
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     
+                    xmlns:res="clr-namespace:Mini_Switching_Management_System_Client.Common.Resources"
+
                     xmlns:wpf="clr-namespace:Mini_Switching_Management_System_Client.Model"
                     xmlns:controls="http://schemas.panthernet.ru/graphx/">
 
@@ -21,11 +23,36 @@
                             </Grid.ColumnDefinitions>
                             <Polygon Points="50,0 0,38 19,100 81,100 100,38"
                                      Stroke="Black"
-                                     StrokeThickness="2"
-                                     Fill="LightCoral"/>
-                            <StackPanel>
-                                <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
-                                <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="1" Margin="3"/>
+                                     StrokeThickness="2">
+                                <Polygon.Style>
+                                    <Style TargetType="Polygon">
+                                        <!-- default color -->
+                                        <Setter Property="Fill" Value="Gray"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding State}" Value="True">
+                                                <Setter Property="Fill" Value="LimeGreen"/>
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding State}" Value="False">
+                                                <Setter Property="Fill" Value="Red"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Polygon.Style>
+                            </Polygon>
+                            <StackPanel HorizontalAlignment="Center">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{x:Static res:Resource.Label_switch}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                    <Label Content="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{x:Static res:Resource.Label_id}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                    <Label Content="{Binding ID}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Grid.Column="1" Grid.Row="0" Margin="3"/>
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
