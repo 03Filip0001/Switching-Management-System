@@ -22,7 +22,7 @@ namespace Mini_Switching_Management_System_Client
 
             var logic = new DataLogicCore();
             tg_Area.LogicCore = logic;
-            logic.DefaultLayoutAlgorithm = LayoutAlgorithmTypeEnum.KK;
+            logic.DefaultLayoutAlgorithm = LayoutAlgorithmTypeEnum.Sugiyama;
             logic.DefaultOverlapRemovalAlgorithm = OverlapRemovalAlgorithmTypeEnum.FSA;
             logic.DefaultOverlapRemovalAlgorithmParams.HorizontalGap = 50;
             logic.DefaultOverlapRemovalAlgorithmParams.VerticalGap = 50;
