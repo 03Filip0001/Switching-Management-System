@@ -83,19 +83,28 @@ namespace Mini_Switching_Management_System_Client
             List<CommonLibrarySE.Substation> sub = DTOMapper.Substation.ToSubstation(res);
 
             var graph = new Graph();
+            
 
             foreach (var subitem in sub)
             {
-                graph.AddVertex(new DataVertex { ID = subitem.ID, Name = subitem.Name, VertexType = VertexTypes.SUBSTATION });
+                var subVertex = new DataVertex { ID = subitem.ID, Name = subitem.Name, VertexType = VertexTypes.SUBSTATION };
+                graph.AddVertex(subVertex);
                 foreach (var feeder in subitem.Feeders)
                 {
-                    graph.AddVertex(new DataVertex { ID = feeder.ID, Name = feeder.Name, VertexType = VertexTypes.FEEDER });
+                    var feedVertex = new DataVertex { ID = feeder.ID, Name = feeder.Name, VertexType = VertexTypes.FEEDER };
+                    graph.AddVertex(feedVertex);
+                    graph.AddEdge(new DataEdge(subVertex, feedVertex, 10) { Text = "", ToolTipText=""});
                     foreach (var sw in feeder.Switches)
                     {
-                        graph.AddVertex(new DataVertex { ID = sw.ID, State = sw.State, VertexType = VertexTypes.SWITCH });
+                        var switchVertex = new DataVertex { ID = sw.ID, State = sw.State, VertexType = VertexTypes.SWITCH };
+                        graph.AddVertex(switchVertex);
+                        graph.AddEdge(new DataEdge(feedVertex, switchVertex, 10) { Text = "", ToolTipText=""});
                     }
                 }
             }
+
+            tg_Area.ShowAllEdgesLabels(false);
+            tg_Area.EdgeLabelFactory = null;
             tg_Area.GenerateGraph(graph);
 
             foreach (var kvp in tg_Area.VertexList)

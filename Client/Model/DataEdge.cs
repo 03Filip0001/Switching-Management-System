@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace Mini_Switching_Management_System_Client.Model
 {
-    public class SubstationEdge :EdgeBase<DataVertex>, INotifyPropertyChanged
+    public class DataEdge : EdgeBase<DataVertex>, INotifyPropertyChanged
     {
         public double Angle { get; set; }
         private string _text;
         public string Text { get { return _text; } set { _text = value; OnPropertyChanged("Text"); } }
         public string ToolTipText { get; set; }
 
-        public SubstationEdge(DataVertex source, DataVertex target, double weight = 1)
+        public DataEdge(DataVertex source, DataVertex target, double weight = 1)
                     : base(source, target, weight)
         {
             Angle = 90;
         }
 
-        public SubstationEdge()
+        public DataEdge()
             : base(null, null, 1)
         {
             Angle = 90;
